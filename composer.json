@@ -1,0 +1,12 @@
+{
+	"name": "japannt/shuzu",
+	"description": "Basic imageboard",
+	"type": "project",
+	"license": "AGPL-3.0",
+	"autoload": {
+		
+	},
+	"require": {
+		"gregwar/captcha": "1.*"
+	}
+}
