@@ -28,8 +28,8 @@
 		errimg($root);
 	}
 
-	$stmt = $db->query("SELECT attachmenturl, mime FROM posts WHERE postid = $postId");
-	$stmt->execute();
+	$stmt = $db->query("SELECT attachmenturl, mime FROM posts WHERE postid = ?");
+	$stmt->execute([$postId]);
 	$result = $stmt->fetchAll();
 
 	$attachmenturl = $result[0]["attachmenturl"];	// What the fuck???
