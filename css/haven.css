@@ -182,7 +182,6 @@ hr {
 	justify-content: flex-start;
 	align-content: flex-start;
 	align-items: flex-start;
-	align-content: flex-start;
 	align-self: center;
 }
 
@@ -367,8 +366,10 @@ blockquote pre {
 
 .thread-reply img{
 	object-fit: cover;
-	height: 100%;
-	width: 100%;
+}
+
+.fullImage {
+	width: 100% !important;
 }
 
 /* FOOTER */
