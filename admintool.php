@@ -1,4 +1,9 @@
 <?php
+
+// CHANGE ME!!!
+$password = "CHANGE ME";
+// CHANGE ME!!!
+
 require_once($_SERVER["DOCUMENT_ROOT"] . "/include/phpheader.php");
 require_once("$root/include/func.php");
 
@@ -18,8 +23,6 @@ function success($message)
 	print("<p><b>SUCCESS:</b> $message</p><h3>[ <a href=\"/admintool.php\">back</a> ]</h3>");
 	exit();
 }
-
-$password = "SET_PASSWORD_THERE";
 
 if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SERVER["PHP_AUTH_USER"] != "admin" || $_SERVER["PHP_AUTH_PW"] != $password) {
 	header("WWW-Authenticate: Basic realm=\"shuzuAdminTool\"");

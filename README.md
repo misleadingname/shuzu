@@ -1,12 +1,14 @@
 # Shuzu
-## Instructions
-Make sure to route everything into `/index.php`.
+an opensource imageboard written in PHP.
+___
+# Set-up
+To get shuzu running, you need to meet the *prerequisites*.
 
-And do NOT forget to change the `$password` in `/admintool.php`.
+## Prerequisites
+For shuzu to work, it needs to be in this environment:
+- A PHP version that is greater than 8.0 (version's lower than 8.1 werent tested!).
+- SQLite, image-magick extensions installed and enabled.
+- An empty subdomain. Shuzu **can't** run in a subdirectory because of it's heavy reliance on routing.
 
-## Requirements
-- PHP>6
-- imagemagick (and the imagemagick plugin in the php installation)
-
-## Limitations
-- Does not work on **Mobile**
+## Installation
+The easiest way to keep up with shuzu updates is to install `git` and pull to the repository every now and then.

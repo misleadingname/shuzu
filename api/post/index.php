@@ -49,7 +49,7 @@ if ($type == "reply" && ($replyto == null || $replyto == "")) {
 }
 
 if ($type == "post" && $uploadedfile["error"] == 4) {
-	error("No file attached to a thread.php.");
+	error("No file attached to a thread.");
 }
 
 if ($uploadedfile["size"] / 1000 > 3000) {
@@ -61,6 +61,14 @@ if (!in_array($uploadedfile["type"], $allowed_types, true) && $uploadedfile["err
 }
 
 if($uploadedfile["error"] == 0) {
+	if(!file_exists("$root/usercontent/media/")) {
+		error_log("media directory doesn't exist! creating one...", 0);
+		if(!mkdir("$root/usercontent/media", 0755, true)) {
+			error("Internal server error, NOT SHUZHU'S FAULT! THIS ISN'T A BUG!");
+			exit();
+		}
+	}
+
 	$ext = strtolower(pathinfo($uploadedfile["name"], PATHINFO_EXTENSION));
 	$target = "$root/usercontent/media/" . sha1_file($uploadedfile["tmp_name"]) . ".$ext";
 	move_uploaded_file($uploadedfile["tmp_name"], $target);
