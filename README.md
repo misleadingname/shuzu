@@ -34,7 +34,7 @@ Enable the general webserver file-serving, and execute php as normal.
 
 ### Configuring the database
 Shuzu **will not** work out of the box, it needs to be configured. Thankfully it's easy to do so.
- - After configuring the webserver, navigate to `/admintool.php` and enter the password you set earlier.
+ - After configuring the webserver, navigate to `/admintool.php` and authenticate.
  - Look for the `!!! NUCLEAR OPTIONS !!!` section and click the `nuke` button.
  - After the database is nuked, you can start configuring everything else.
 
