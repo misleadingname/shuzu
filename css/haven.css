@@ -360,11 +360,11 @@ blockquote pre {
 	border: 2px solid crimson;
 }
 
-.thread-reply a{
+.thread-reply a {
 	display: inline-block;
 }
 
-.thread-reply img{
+.thread-reply img {
 	object-fit: cover;
 }
 
