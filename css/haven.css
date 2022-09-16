@@ -369,7 +369,7 @@ blockquote pre {
 }
 
 .fullImage {
-	width: 100% !important;
+	height: 100% !important;
 }
 
 /* FOOTER */
