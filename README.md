@@ -19,14 +19,8 @@ The easiest way to keep up with shuzu updates is to use `git` and pull to the re
 
 ## Configuration
 ### Configuring shuzu:
-### TEMPORARY!: I am working on a configuration file based solution! Where more things will be customiseable!
-The only thing that is configure-able is the password in `/admintool.php`, simply open the file and edit the 4th file. By default, it should look like this.
-```php
-// CHANGE ME!!!
-$password = "CHANGE ME";
-// CHANGE ME!!!
-```
-By the way, the login is `admin` and it can't be changed *(yet!)*.
+
+Edit `config.php` and suit it to your needs. 
 
 ### Configuring the webserver 
 Enable the general webserver file-serving, and execute php as normal.  
@@ -70,7 +64,7 @@ It's generally a good idea to do these if you ask me.
 # TODO
  - [x] Working release.
  - [x] Fix media handling.
- - [ ] Proper configuration file
+ - [x] Proper configuration file
  - [ ] Captcha.
 
 # Demo

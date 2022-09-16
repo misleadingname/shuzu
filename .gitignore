@@ -1,3 +1,4 @@
-/.idea/
-/db/
-/usercontent/
+db/
+usercontent/
+
+config.php
