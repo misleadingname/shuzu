@@ -6,9 +6,9 @@ To get shuzu running, you need to meet the *prerequisites*.
 
 ## Prerequisites
 For shuzu to work, it needs to be in this environment:
-- A PHP version that is greater than 8.0 (version's lower than 8.1 werent tested!).
+- A PHP version that is greater than 8.0 (version's lower than 8.1 weren't tested!).
 - SQLite, image-magick extensions installed and enabled.
-- An empty subdomain. Shuzu **can't** run in a subdirectory because of it's heavy reliance on routing.
+- An empty subdomain. Shuzu **can't** run in a subdirectory because of its heavy reliance on routing.
 
 ## Installation
  - Pull the repo inside an empty directory. `git clone https://github.com/japannt/shuzu.git`
@@ -20,26 +20,50 @@ The easiest way to keep up with shuzu updates is to use `git` and pull to the re
 ## Configuration
 ### Configuring shuzu:
 ### TEMPORARY!: I am working on a configuration file based solution! Where more things will be customiseable!
-The only thing that is configure-able is the password in `/admintool.php`, simply open the file and edit the 4th file. By default it should look like this.
+The only thing that is configure-able is the password in `/admintool.php`, simply open the file and edit the 4th file. By default, it should look like this.
 ```php
 // CHANGE ME!!!
 $password = "CHANGE ME";
 // CHANGE ME!!!
 ```
-### Configuring the webserver: 
+### Configuring the webserver 
 Enable the general webserver file-serving, and execute php as normal.  
 **Important!** Use the router `/index.php` only when the server is about to yield a 404 error!  
-### Example configurations:
-```
-Caddy:
 
+### Configuring the database
+Shuzu **will not** work out of the box, it needs to be configured. Thankfully it's easy to do so.
+ - After configuring the webserver, navigate to `/admintool.php` and enter the password you set earlier.
+ - Look for the `!!! NUCLEAR OPTIONS !!!` section and click the `nuke` button.
+ - After the database is nuked, you can start configuring everything else.
+
+### Example configuration(s):
+
+Caddy:
 ```
+shuzu.example.com {
+	encode gzip
+
+	root * /srv/shuzu/
+
+	php_fastcgi unix//run/php-fpm/php-fpm.sock {
+		index /index.php
+	}
+
+	file_server {
+		index off
+	}
+
+	try_files {path} {path}/index.php
+}
+```
+
+*PR's for the readme on configurations for other webservers will be welcome!*
 
 ## Good practice
 It's generally a good idea to do these if you ask me.
  - Restrict the users from accessing anything in `/include`.
  - Use a strong password for the administration tool, and don't share it at all.
- - Use SSL for gods sake. (so many imageboards don't have SSL enabled.)
+ - Use SSL for god’s sake. (so many imageboards don't have SSL enabled.)
 
 # TODO
  - [x] Working release.
