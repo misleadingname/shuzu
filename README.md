@@ -39,7 +39,7 @@ Shuzu **will not** work out of the box, it needs to be configured. Thankfully it
 ### Example configuration(s):
 
 Caddy:
-```
+```caddyfile
 shuzu.example.com {
 	encode gzip
 
