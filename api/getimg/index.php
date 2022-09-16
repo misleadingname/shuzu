@@ -3,7 +3,7 @@
 	require_once("$root/include/func.php");
 
 	function errimg($roote) {
-//		http_response_code(404);
+		http_response_code(404);
 
 		$img = fopen("$roote/images/noimage.png", "r");
 
@@ -47,5 +47,5 @@
 
 		fpassthru($img);
 	} else {
-		errimg();
+		errimg($root);
 	}
