@@ -11,4 +11,17 @@ For shuzu to work, it needs to be in this environment:
 - An empty subdomain. Shuzu **can't** run in a subdirectory because of it's heavy reliance on routing.
 
 ## Installation
+ - Pull the repo inside an empty directory. `git clone https://github.com/japannt/shuzu.git`
+ - Setup the webserver to be in the directory or a subdomain.
+
+### Updating?
 The easiest way to keep up with shuzu updates is to install `git` and pull to the repository every now and then.
+
+## Configuration
+### TEMPORARY!: I am working on a configuration file based solution! Where more things will be customiseable!
+The only thing that is configure-able is the password in `/admintool.php`, simply open the file and edit the 4th file. By default it should look like this.
+```injectablephp
+// CHANGE ME!!!
+$password = "CHANGE ME";
+// CHANGE ME!!!
+```
