@@ -70,3 +70,6 @@ It's generally a good idea to do these if you ask me.
  - [x] Fix media handling.
  - [ ] Proper configuration file
  - [ ] Captcha.
+
+# Demo
+A full instance of shuzu is available at [shuzu.japannt.tk](https://shuzu.japannt.tk/), have fun!
