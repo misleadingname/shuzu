@@ -26,6 +26,8 @@ The only thing that is configure-able is the password in `/admintool.php`, simpl
 $password = "CHANGE ME";
 // CHANGE ME!!!
 ```
+By the way, the login is `admin` and it can't be changed *(yet!)*.
+
 ### Configuring the webserver 
 Enable the general webserver file-serving, and execute php as normal.  
 **Important!** Use the router `/index.php` only when the server is about to yield a 404 error!  
