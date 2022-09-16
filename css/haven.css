@@ -355,6 +355,13 @@ blockquote pre {
 	font-family: 'Times New Roman', Times, serif;
 }
 
+blockquote pre code {
+	background-color: dimgray;
+	color: white;
+	padding: 4px;
+	border-radius: 4px;
+}
+
 .thread-reply:target {
 	background-color: silver;
 	border: 2px solid crimson;
