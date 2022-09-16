@@ -14,17 +14,13 @@
 	}
 
 	$postId = htmlspecialchars($_GET["id"]);
-	$thumb = htmlspecialchars($_GET["thumb"]);
+	$thumb = $_GET["thumb"] ?? false;
 
 	if($postId == null || $postId == "") {
 		errimg($root);
 	}
 
 	if(!is_numeric($postId)) {
-		errimg($root);
-	}
-
-	if($thumb == null || $thumb == "") {
 		errimg($root);
 	}
 
