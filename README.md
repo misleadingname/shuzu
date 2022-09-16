@@ -20,7 +20,7 @@ The easiest way to keep up with shuzu updates is to use `git` and pull to the re
 ## Configuration
 ### Configuring shuzu:
 
-Edit `config.php` and suit it to your needs. 
+Copy `config.default.php` to `config.php` then edit the newly copied file.
 
 ### Configuring the webserver 
 Enable the general webserver file-serving, and execute php as normal.  
