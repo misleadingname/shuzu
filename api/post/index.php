@@ -24,7 +24,7 @@ if ($type == "reply") {
 
 $name = htmlspecialchars($_POST["name"]);
 $title = htmlspecialchars($_POST["title"]);
-$content = htmlspecialchars($_POST["content"]);
+$content = $_POST["content"];
 
 $uploadedfile = $_FILES["attachment"];
 

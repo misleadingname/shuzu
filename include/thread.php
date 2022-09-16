@@ -105,7 +105,20 @@ $replies = $stmt->fetchAll();
                     if ($reply["title"] != null || $reply["title"] != "") {
                         print("<b>" . $reply["title"] . "</b><br><br>");
                     }
-                    print($reply["text"]); ?></pre>
+
+                    $txt = $reply["text"];
+
+                    $txt = htmlspecialchars($txt);
+                    $txt = preg_replace('/&gt;&gt;(\d*)/', "<a class=\"mention\" href=\"/$splitRequest[1]/thread/$splitRequest[3]#$1\">>>$1</a>", $txt);
+                    $txt = preg_replace("/(^|\n)&gt;.*/", '<span class="green">$0</span>', $txt);
+
+                    $txt = preg_replace("/\*\*(.+?)\*\*/", '<b>$1</b>', $txt);
+                    $txt = preg_replace("/\*(.+?)\*/", '<i>$1</i>', $txt);
+                    $txt = preg_replace("/`(.+?)`/", '<code>$1</code>', $txt);
+
+//                    $txt = str_replace("\n", '<br>');
+
+                    print($txt); ?></pre>
             </blockquote>
         </div>
         <?php
