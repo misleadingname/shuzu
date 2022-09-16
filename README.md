@@ -12,16 +12,37 @@ For shuzu to work, it needs to be in this environment:
 
 ## Installation
  - Pull the repo inside an empty directory. `git clone https://github.com/japannt/shuzu.git`
- - Setup the webserver to be in the directory or a subdomain.
+ - Follow the instructions in the section below.
 
 ### Updating?
-The easiest way to keep up with shuzu updates is to install `git` and pull to the repository every now and then.
+The easiest way to keep up with shuzu updates is to use `git` and pull to the repository every now and then.
 
 ## Configuration
+### Configuring shuzu:
 ### TEMPORARY!: I am working on a configuration file based solution! Where more things will be customiseable!
 The only thing that is configure-able is the password in `/admintool.php`, simply open the file and edit the 4th file. By default it should look like this.
-```injectablephp
+```php
 // CHANGE ME!!!
 $password = "CHANGE ME";
 // CHANGE ME!!!
 ```
+### Configuring the webserver: 
+Enable the general webserver file-serving, and execute php as normal.  
+**Important!** Use the router `/index.php` only when the server is about to yield a 404 error!  
+### Example configurations:
+```
+Caddy:
+
+```
+
+## Good practice
+It's generally a good idea to do these if you ask me.
+ - Restrict the users from accessing anything in `/include`.
+ - Use a strong password for the administration tool, and don't share it at all.
+ - Use SSL for gods sake. (so many imageboards don't have SSL enabled.)
+
+# TODO
+ - [x] Working release.
+ - [x] Fix media handling.
+ - [ ] Proper configuration file
+ - [ ] Captcha.
