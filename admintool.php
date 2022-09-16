@@ -1,9 +1,5 @@
 <?php
 
-// CHANGE ME!!!
-$password = "CHANGE ME";
-// CHANGE ME!!!
-
 require_once($_SERVER["DOCUMENT_ROOT"] . "/include/phpheader.php");
 require_once("$root/include/func.php");
 
@@ -24,7 +20,7 @@ function success($message)
 	exit();
 }
 
-if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SERVER["PHP_AUTH_USER"] != "admin" || $_SERVER["PHP_AUTH_PW"] != $password) {
+if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SERVER["PHP_AUTH_USER"] != $ADMIN_USER || $_SERVER["PHP_AUTH_PW"] != $ADMIN_PASSWORD) {
 	header("WWW-Authenticate: Basic realm=\"shuzuAdminTool\"");
 	http_response_code(401);
 	$httpStatus = 401;

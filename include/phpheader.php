@@ -1,6 +1,8 @@
 <?php
 $root = $_SERVER["DOCUMENT_ROOT"];
 
+require_once $root.'/config.php';
+
 $request = $_SERVER['REQUEST_URI'];
 $splitRequest = explode("/", $request);
 
