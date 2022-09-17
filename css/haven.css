@@ -276,7 +276,9 @@ hr {
 	color: white;
 	background-color: dimgray;
 	padding: 4px;
-	border-radius: 25%;
+
+	border-radius: 5px;
+
 	left: 24px;
 	top: 24px;
 }
@@ -287,7 +289,9 @@ hr {
 	color: white;
 	background-color: dimgray;
 	padding: 4px;
-	border-radius: 25%;
+
+	border-radius: 5px;
+
 	transform: translate(32px, 32px);
 }
 
@@ -357,6 +361,21 @@ blockquote pre {
 	padding: 0;
 
 	font-family: 'Times New Roman', Times, serif;
+}
+
+blockquote a {
+	text-decoration: none;
+	color: black;
+}
+
+blockquote a button {
+	display: inline-block;
+	vertical-align: top;
+
+	width: 100%;
+	margin-bottom: 1em;
+
+	box-sizing: border-box;
 }
 
 blockquote pre code {
