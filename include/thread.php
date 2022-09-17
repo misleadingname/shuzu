@@ -76,34 +76,17 @@
 						print("<span class='mime-hack'>WEBM</span>");
 					} else if ($reply["mime"] == "video/mp4") {
 						print("<span class='mime-hack'>MP4</span>");
-					} else if ($reply["mime"] == "image/gif") {
-						print("<span class='mime-hack'>GIF</span>");
 					}
 				?>
 
-                <blockquote>
-					<?php
-						if ($reply["attachmenturl"] != null || $reply["attachmenturl"] != "") {
-							?>
-                            <a href="/api/getimg?id=<?= $reply['postid'] ?>" mime="<?php print($reply["mime"]); ?>" onclick="embed(event)">
-								<?php
-									if (str_starts_with($reply["mime"], "image/")) {
-										?>
-                                        <img src="/api/getimg?id=<?= $reply['postid'] ?>&thumb=true" alt="">
-										<?php
-									} else if (str_starts_with($reply["mime"], "video/")) {
-										?>
-                                            <button class="hidden">Close video</button><br class="hidden">
-                                            <img src="/api/getimg?id=<?= $reply['postid'] ?>&thumb=true" alt="">
-                                            <video class="hidden" src="/api/getimg?id=<?= $reply['postid'] ?>" controls></video><br>
-                                            <sup><?php print($reply["filename"] . " " . number_format($reply["size"] / 1024, 2, ".", ".")); ?>KB</sup>
-										<?php
-									}
-								?>
+                <blockquote class="reply-inner">
+					<?php if ($reply["attachmenturl"] != null || $reply["attachmenturl"] != "") {?>
+                            <a href="/api/getimg?id=<?= $reply['postid'] ?>" mime="<?=$reply["mime"] ?>" onclick="embed(event)" class="reply-image">
+                                <button class="hidden">Close video</button>
+                                <img src="/api/getimg?id=<?= $reply['postid'] ?>&thumb=true" alt="">
+                                <sup class="file-info"><?=$reply["filename"] . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>
                             </a>
-							<?php
-						}
-					?>
+							<?php } ?>
                     <pre class="reply-text"><?php
 							if ($reply["title"] != null || $reply["title"] != "") {
 								print("<b>" . $reply["title"] . "</b><br>");
