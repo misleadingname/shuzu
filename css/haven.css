@@ -35,6 +35,10 @@ hr {
 	font-weight: bold;
 }
 
+.hidden {
+	display: none;
+}
+
 /* HEADER */
 
 .header {
@@ -372,14 +376,12 @@ blockquote pre code {
 }
 
 .thread-reply img {
-	object-fit: cover;
+	object-fit: none;
 }
 
 .fullImage {
 	width: 100% !important;
 }
-
-
 
 /* FOOTER */
 
