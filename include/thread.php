@@ -62,15 +62,14 @@
 			}
 
 			?>
-            <div id="<?php
-				print($reply["postid"]); ?>" class="thread-reply">
-                <div>
-				<span class="green bold"><?php
-						print($reply["name"]) . $op; ?></span> <?php
-						print(date("d/M/o G:i:s", $reply["timestamp"])); ?>
-                    <a>No.</a><a href="#<?php
-						print($reply["postid"]); ?>"><?php
-							print($reply["postid"]); ?></a>
+            <div id="<?= $reply["postid"] ?>" class="thread-reply">
+                <div class="reply-top">
+                    <span class="green bold"><?php
+                            print   ($reply["name"]) . $op; ?></span> <?php
+                            print(date("d/M/o G:i:s", $reply["timestamp"])); ?>
+                        <a>No.</a><a href="#<?php
+                            print($reply["postid"]); ?>"><?php
+                                print($reply["postid"]); ?></a>
                 </div>
 				<?php
 					if ($reply["mime"] == "image/gif") {
@@ -107,12 +106,10 @@
 							<?php
 						}
 					?>
-                    <?php
+                    <pre class="reply-text"><?php
 							if ($reply["title"] != null || $reply["title"] != "") {
 								print("<b>" . $reply["title"] . "</b><br>");
 							}
-
-                            ?><pre><?php
 
 							$txt = $reply["text"];
 
