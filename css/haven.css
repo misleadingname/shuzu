@@ -302,6 +302,9 @@ hr {
   margin: 0;
   padding: 1.5em;
 }
+.thread-reply .reply-inner .file-info {
+  display: block;
+}
 .thread-reply .reply-inner .reply-image {
   display: inline-block;
   float: left;
@@ -309,9 +312,10 @@ hr {
   color: black;
 }
 .thread-reply .reply-inner .reply-image button {
-  display: inline-block;
+  display: block;
   box-sizing: border-box;
-  width: 50%;
+  width: 25%;
+  margin: auto;
   margin-bottom: 1em;
   vertical-align: top;
 }

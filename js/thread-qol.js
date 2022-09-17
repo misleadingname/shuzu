@@ -21,7 +21,7 @@ function embed(e) {
 
 		let mime = a.parentNode.parentNode.children[1]
 
-		if(video.classList.contains("hidden")) {
+		if (video.classList.contains("hidden")) {
 			a.href = ""
 
 			thumb.classList.add("hidden")

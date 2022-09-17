@@ -363,6 +363,10 @@ hr {
 		margin: 0;
 		padding: 1.5em;
 
+		.file-info {
+			display: block;
+		}
+
 		.reply-image {
 			display: inline-block;
 			float: left;
@@ -370,10 +374,11 @@ hr {
 			color: black;
 
 			button {
-				display: inline-block;
+				display: block;
 				box-sizing: border-box;
 
-				width: 50%;
+				width: 25%;
+				margin: auto;
 				margin-bottom: 1em;
 
 				vertical-align: top;
