@@ -31,7 +31,7 @@
                     <input hidden name="board" value="<?php
 						print($splitRequest[1]); ?>">
                     <input type="text" name="name" placeholder="Name" value="Anonymous" required>
-                    <textarea name="content" placeholder="Content" required></textarea>
+                    <textarea id="replyTextarea" name="content" placeholder="Content" required></textarea>
                     <input type="file" name="attachment">
                     <p>Files up to 3MB are allowed.</p><sup>WEBM, WEBP, MP4, PNG, JPG, GIF.</sup>
                     <input type="submit" value="Post">
@@ -65,11 +65,9 @@
             <div id="<?= $reply["postid"] ?>" class="thread-reply">
                 <div class="reply-top">
                     <span class="green bold"><?php
-                            print   ($reply["name"]) . $op; ?></span> <?php
+                            print($reply["name"] . $op); ?></span> <?php
                             print(date("d/M/o G:i:s", $reply["timestamp"])); ?>
-                        <a>No.</a><a href="#<?php
-                            print($reply["postid"]); ?>"><?php
-                                print($reply["postid"]); ?></a>
+                        <a href="#<?=$reply["postid"] ?>">No.</a><a href="#<?=$reply["postid"] ?>" onclick="mention(event)"><?= $reply["postid"] ?></a>
                 </div>
 				<?php
 					if ($reply["mime"] == "image/gif") {
@@ -131,6 +129,6 @@
 	?>
 </div>
 
-<script src="/js/media-embedder.js"></script>
+<script src="/js/thread-qol.js"></script>
 
 <div class="document">

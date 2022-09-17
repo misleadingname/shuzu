@@ -59,3 +59,15 @@ function embed(e) {
 	e.preventDefault()
 	return false
 }
+
+function mention(e) {
+	let a = e.currentTarget
+	let id = a.parentNode.parentNode.id
+
+	let input = document.getElementById("replyTextarea")
+	input.value += ">>" + id + "\n"
+	input.focus()
+
+	e.preventDefault()
+	return false
+}

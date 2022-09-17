@@ -36,7 +36,7 @@ hr {
 }
 
 .hidden {
-	display: none;
+	display: none !important;
 }
 
 /* HEADER */
@@ -123,9 +123,12 @@ hr {
 		opacity: 0;
 
 		a {
-			width: 100%;
-			height: 100%;
-			padding-right: 100%;
+			width: 320px;
+			height: 120px;
+
+			padding-right: 265px;
+			padding-bottom: 95px;
+
 			text-align: center;
 		}
 	}
@@ -334,7 +337,7 @@ hr {
 		background-color: silver;
 	}
 
-	img {
+	img, video {
 		margin-right: 0.5em;
 		object-fit: none;
 	}
@@ -370,7 +373,7 @@ hr {
 				display: inline-block;
 				box-sizing: border-box;
 
-				width: 100%;
+				width: 50%;
 				margin-bottom: 1em;
 
 				vertical-align: top;
