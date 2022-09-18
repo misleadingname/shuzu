@@ -15,7 +15,7 @@ For shuzu to work, it needs to be in this environment:
  - Follow the instructions in the section below.
 
 ### Updating?
-The easiest way to keep up with shuzu updates is to use `git` and pull to the repository every now and then.
+The easiest way to keep up with shuzu updates is to use `git` and pull to the repository sporadically.
 
 ## Configuration
 ### Configuring shuzu:
@@ -26,13 +26,7 @@ Copy `config.default.php` to `config.php` then edit the newly copied file.
 Enable the general webserver file-serving, and execute php as normal.  
 **Important!** Use the router `/index.php` only when the server is about to yield a 404 error!  
 
-### Configuring the database
-Shuzu **will not** work out of the box, it needs to be configured. Thankfully it's easy to do so.
- - After configuring the webserver, navigate to `/admintool.php` and authenticate.
- - Look for the `!!! NUCLEAR OPTIONS !!!` section and click the `nuke` button.
- - After the database is nuked, you can start configuring everything else.
-
-### Example configuration(s):
+### Example webserver configuration(s):
 
 Caddy:
 ```caddy
@@ -55,6 +49,12 @@ shuzu.example.com {
 
 *PR's for the readme on configurations for other webservers will be welcome!*
 
+### Configuring the database
+Shuzu **will not** work out of the box, it needs to be configured. Thankfully it's easy to do so.
+ - After configuring the webserver, navigate to `/admintool.php` and authenticate with the login and password you set up earlier.
+ - Look for the `!!! NUCLEAR OPTIONS !!!` section and click the `nuke` button.
+ - After the database is nuked, you can start configuring everything else.
+
 ## Good practice
 It's generally a good idea to do these if you ask me.
  - Restrict the users from accessing anything in `/include`.
@@ -62,9 +62,11 @@ It's generally a good idea to do these if you ask me.
  - Use SSL for god’s sake. (so many imageboards don't have SSL enabled.)
 
 # TODO
- - [x] Working release.
+ - [x] ~~Working~~ Functional release.
  - [x] Fix media handling.
- - [x] Proper configuration file
+ - [x] Proper configuration file.
+ - [ ] Sticky threads.
+ - [ ] User banning.
  - [ ] Captcha.
 
 # Demo

@@ -267,6 +267,15 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 						<input type="submit" name="action" value="nuke">
 					</fieldset>
 				</form>
+
+                <form>
+                    <fieldset>
+                        <legend>update databases</legend>
+                        <p>Possibly destructive, use with caution.<br>checks the database for missing tables and creates them.</p>
+                        <input type="text" name="confirm" placeholder="'YES DO AS I SAY'">
+                        <input type="submit" name="action" value="update databases">
+                    </fieldset>
+                </form>
 			</div>
 		</div>
 <?php
