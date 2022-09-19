@@ -1,9 +1,9 @@
 <?php
 	date_default_timezone_set('UTC');
 
-	$stmt = $db->prepare("SELECT type FROM posts WHERE (postid=" . $splitRequest[3] . ")");
-	$stmt->execute();
-	$type = $stmt->fetchAll()[0][0];
+	$stmt = $db->prepare("SELECT type FROM posts WHERE postid=?");
+	$stmt->execute([$splitRequest[3]]);
+	$type = $stmt->fetch()[0];
 
 	if ($type != "post") {
 		http_response_code(404);

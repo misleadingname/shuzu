@@ -4,9 +4,9 @@
 	$insults = file("$root/include/insults.txt");
 
     if($splitRequest[3] != "" || $splitRequest[3] != null) {
-		$stmt = $db->prepare("SELECT * FROM posts WHERE (postid=" . $splitRequest[3] . ")");
-		$stmt->execute();
-		$result = $stmt->fetchAll()[0];
+		$stmt = $db->prepare("SELECT * FROM posts WHERE postid=?");
+		$stmt->execute([$splitRequest[3]]);
+		$result = $stmt->fetch();
 	}
 
 ?>
