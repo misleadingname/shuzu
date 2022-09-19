@@ -52,8 +52,17 @@ print($_SESSION["phrase"])
 <?php
 require_once("$root/include/func.php");
 
-$stmt = $db->prepare("SELECT *, (SELECT coalesce(max(timestamp), p.timestamp) FROM posts r WHERE r.type='reply' AND r.replyto = p.postid) AS bump FROM posts p WHERE boardurl=? AND type = 'post' ORDER BY bump DESC");
-$stmt->execute([$splitRequest[1]]);
+$stmt = $db->prepare(<<<SQL
+SELECT *,
+       (SELECT COALESCE(MAX(timestamp), p.timestamp)
+        FROM posts r
+        WHERE r.postid IN (SELECT rr.postid FROM posts rr WHERE rr.replyto = p.postid ORDER BY rr.postid LIMIT ?)) AS bump
+FROM posts p
+WHERE boardurl = ?
+  AND type = 'post'
+ORDER BY bump DESC;
+SQL);
+$stmt->execute([$BUMP_LIMIT,$splitRequest[1]]);
 $threads = $stmt->fetchAll();
 
 //print("<pre>");
