@@ -59,7 +59,7 @@ Shuzu **will not** work out of the box, it needs to be configured. Thankfully it
 Shuzu will pick a random banner from the `images/banners/{board}` directory.
 Banners have resolution of 468x80px.
 
-To add new banners copy your banner to `image/banners/{target board}`(Create if doesn't exist).
+To add new banners copy your banner to `images/banners/{board}`(Create if doesn't exist).
 
 ## Good practice
 It's generally a good idea to do these if you ask me.
