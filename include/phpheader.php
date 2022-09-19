@@ -1,6 +1,10 @@
 <?php
 $root = $_SERVER["DOCUMENT_ROOT"];
 
+if(!file_exists("$root/config.php")) {
+	die("Can't find the configuration file!<br>Shuzu isn't configured!<br><br>please copy the config.default.php to config.php and edit it!");
+}
+
 require_once("$root/config.php");
 
 $request = $_SERVER['REQUEST_URI'];
