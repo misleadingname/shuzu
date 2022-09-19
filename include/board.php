@@ -52,8 +52,8 @@ print($_SESSION["phrase"])
 <?php
 require_once("$root/include/func.php");
 
-$stmt = $db->prepare("SELECT * FROM posts WHERE (boardurl='" . $splitRequest[1] . "')");
-$stmt->execute();
+$stmt = $db->prepare("SELECT *, (SELECT coalesce(max(timestamp), p.timestamp) FROM posts r WHERE r.type='reply' AND r.replyto = p.postid) AS bump FROM posts p WHERE boardurl=? AND type = 'post' ORDER BY bump DESC");
+$stmt->execute([$splitRequest[1]]);
 $threads = $stmt->fetchAll();
 
 //print("<pre>");
@@ -70,9 +70,6 @@ if ($threads == null) {
 } else {
 	print("</div>\n<div class=\"catalog\">");
 	foreach ($threads as $thread) {
-		if ($thread["type"] != "post") {
-			continue;
-		}
 	?>
 		<div class="catalog-thread">
 			<a href="/<?php print($splitRequest[1] . "/thread/" . $thread["postid"]); ?>">
