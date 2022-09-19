@@ -29,7 +29,23 @@ print($_SESSION["phrase"])
 		</div>
 	</div>
 
-	<hr>
+    <div class="board-banner">
+        <?php
+        $errDir = glob("$root/images/banners/*/*.*");
+        if(sizeof($errDir) != 0){
+            $file = array_rand($errDir);
+            preg_match('/.*\/banners\/(.*)\/.*\..*/', $errDir[$file], $out);
+
+            $localPath = path2url($errDir[$file]);
+            ?>
+            <a href="/<?= $out[1] ?>">
+                <img src="<?= $localPath ?>" alt=""/>
+            </a>
+        <?php } ?>
+    </div>
+
+
+    <hr>
 
 </div>
 

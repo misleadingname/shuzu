@@ -55,6 +55,12 @@ Shuzu **will not** work out of the box, it needs to be configured. Thankfully it
  - Look for the `!!! NUCLEAR OPTIONS !!!` section and click the `nuke` button.
  - After the database is nuked, you can start configuring everything else.
 
+### Adding banners
+Shuzu will pick a random banner from the `image/banners/{board}` directory.
+Banners have resolution of 468x80px.
+
+To add new banners copy your banner to `image/banners/{target board}`(Create if doesn't exist).
+
 ## Good practice
 It's generally a good idea to do these if you ask me.
  - Restrict the users from accessing anything in `/include`.
