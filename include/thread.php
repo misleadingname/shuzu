@@ -46,8 +46,8 @@
 </div>
 
 <?php
-	$stmt = $db->prepare("SELECT * FROM posts WHERE (replyto=" . $splitRequest[3] . ") OR (postid=" . $splitRequest[3] . ")");
-	$stmt->execute();
+	$stmt = $db->prepare("SELECT * FROM posts WHERE replyto=? OR postid=?");
+	$stmt->execute([$splitRequest[3],$splitRequest[3]]);
 	$replies = $stmt->fetchAll();
 ?>
 
