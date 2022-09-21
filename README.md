@@ -76,4 +76,4 @@ It's generally a good idea to do these if you ask me.
  - [ ] Captcha.
 
 # Demo
-A full instance of shuzu is available at [shuzu.japannt.tk](https://shuzu.japannt.tk/), have fun!
+A full instance of shuzu is available at [shuzu.new-japannt.tk](https://shuzu.new-japannt.tk/), have fun!
