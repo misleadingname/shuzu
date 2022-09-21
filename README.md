@@ -56,10 +56,10 @@ Shuzu **will not** work out of the box, it needs to be configured. Thankfully it
  - After the database is nuked, you can start configuring everything else.
 
 ### Adding banners
-Shuzu will pick a random banner from the banners directory.
-
 To add new banners, put your banner to `/images/banners/{board}` *(Create if doesn't exist)*.
 Every banner should have a resolution of 468x80px.
+
+Shuzu each time will pick a random banner.
 
 ## Good practice
 It's generally a good idea to do these if you ask me.
