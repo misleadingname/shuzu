@@ -7,9 +7,11 @@ require_once("include/func.php");
 require_once("include/header.php");
 
 if ($request == '/') {
-    require_once("include/home.php");
+    require_once("pages/home.php");
 } else if ($request == '/admintool') {
     require_once('pages/admintool.php');
+} else if ($request == '/rules') {
+    require_once('pages/rules.php');
 } else {
     $stmt = $db->prepare("SELECT * FROM boards WHERE url = ?");
     $stmt->execute([$splitRequest[1]]);
