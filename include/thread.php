@@ -18,12 +18,12 @@
 		print("<a href=\"/$splitRequest[1]\">" . $splitRequest[1] . "</a> - " . $splitRequest[3]); ?></p>
 
 <div class="half-size centered">
-    <div class="box">
+    <div class="box replyBox">
         <div class="boxbar">
             <h3>Reply to this thread:</h3>
         </div>
         <div class="boxinner">
-            <form action="/api/post" enctype="multipart/form-data" method="post">
+            <form action="/api/post" enctype="multipart/form-data" method="post" onsubmit="submitReply(event)">
                 <div class="flex-links">
                     <input hidden name="type" value="reply">
                     <input hidden name="replyto" value="<?php

@@ -345,4 +345,11 @@ hr {
   text-align: center;
 }
 
+.replyBox {
+  position: fixed;
+  right: 32px;
+  top: 32px;
+  width: 400px;
+}
+
 /*# sourceMappingURL=haven.css.map */

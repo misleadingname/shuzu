@@ -64,3 +64,22 @@ function mention(e) {
 	e.preventDefault()
 	return false
 }
+
+function submitReply(e){
+	let form = e.target
+
+	fetch(form.action, {
+		method: form.method,
+		body: new FormData(form),
+	}).then(() => {
+		fetch(window.location.href).then(res => res.text()).then(text => {
+			let html = document.open("text/html", "replace");
+			html.write(text);
+			html.close();
+			scrollTo(0,scrollMaxY)
+		})
+	});
+
+
+	e.preventDefault()
+}
