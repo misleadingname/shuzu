@@ -24,7 +24,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 	header("WWW-Authenticate: Basic realm=\"shuzuAdminTool\"");
 	http_response_code(401);
 	$httpStatus = 401;
-	require_once("$root/log_error/index.php");
+	require_once("$root/error/index.php");
 	exit();
 } else {
 
@@ -45,7 +45,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 							break;
 						}
 						info("action confirmed");
-						if ($_GET["url"] == null || $_GET["url"] == "") {
+						if (empty($_GET["url"])) {
 							log_error("no name given");
 							break;
 						}
@@ -55,8 +55,8 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 						$stmt = $db->prepare("SELECT * FROM boards WHERE url = ?");
 						$stmt->execute(array($url));
 						$board = $stmt->fetch();
-						if ($board["url"] == "") {
-							log_error("board.php does not exist");
+						if (empty($_GET["url"])) {
+							log_error("board does not exist");
 							break;
 						}
 
@@ -66,28 +66,26 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 						info("bound parameter");
 						
 						$stmt->execute();
-						$result = $stmt->fetchAll();
-						if($result == null) {
+						$result = $stmt->fetch();
+						if(empty($result)) {
 							success("board.php deleted");
 						} else {
 							log_error("board.php doesn't exist or something went wrong");
 						}
 					case "create board":
 						info("creating board");
-						if ($_GET["url"] == null || $_GET["url"] == "") {
+						if (empty($_GET["url"])) {
 							log_error("no name given");
 							break;
 						}
-						if ($_GET["description"] == null || $_GET["description"] == "") {
+						if (empty($_GET["description"])) {
 							log_error("no description given");
 							break;
 						}
 						
 						$url = strtolower(htmlspecialchars($_GET["url"]));
 						$description = htmlspecialchars($_GET["description"]);
-						$nsfw = htmlspecialchars(intval($_GET["nsfw"]));
-
-						info($nsfw);
+						$nsfw = intval($_GET["nsfw"])   ;
 
 						$stmt = $db->prepare("INSERT INTO boards (url, desc, nsfw) VALUES (?, ?, ?)");
 						info("prepared stmt");
@@ -97,8 +95,8 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 						info("bound parameters");
 						
 						$stmt->execute();
-						$result = $stmt->fetchAll();
-						if($result == null) {
+						$result = $stmt->fetch();
+						if(empty($result)) {
 							success("board.php created");
 						} else {
 							log_error("board.php already exists or something went wrong");
@@ -115,8 +113,8 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 						// delete every entry from posts
 						$stmt = $db->prepare("DELETE FROM posts");
 						$stmt->execute();
-						$result = $stmt->fetchAll();
-						if($result == null) {
+						$result = $stmt->fetch();
+						if(empty($result)) {
 							success("all posts deleted");
 						} else {
 							log_error("something went wrong");
@@ -156,9 +154,9 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 						)');
 						info("prepared stmt (create boards)");
 						$stmt->execute();
-						$result = $stmt->fetchAll();
+						$result = $stmt->fetch();
 						info("executing SQL");
-						if ($result == null) {
+						if (empty($result)) {
 							info("executed successfully");
 						} else {
 							log_error("unable to execute SQL");
@@ -181,14 +179,96 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 						)');
 						info("prepared stmt (create posts)");
 						$stmt->execute();
-						$result = $stmt->fetchAll();
+						$result = $stmt->fetch();
 						info("executing SQL");
-						if ($result == null) {
+						if (empty($result)) {
 							info("executed successfully");
 						} else {
 							log_error("unable to execute SQL");
 						}
 						success("nuked successfully");
+						break;
+					case "update databases":
+						if ($_GET["confirm"] != "YES DO AS I SAY") {
+							log_error("powerful action not confirmed");
+							break;
+						}
+						info("action confirmed");
+						$stmt = $db->prepare('SELECT name FROM sqlite_master WHERE name="boards"');
+						info("prepared stmt");
+						$stmt->execute();
+						$result = $stmt->fetch();
+						info("executing SQL");
+						if(empty($result)) {
+							info("[board] doesn't exist. creating...");
+
+							$stmt = $db->prepare('CREATE TABLE "boards" (
+							"url"	TEXT NOT NULL UNIQUE,
+							"desc"	TEXT NOT NULL,
+							"nsfw"	INTEGER NOT NULL,
+							PRIMARY KEY("url")
+						)');
+							info("prepared stmt (create boards)");
+							$stmt->execute();
+							$result = $stmt->fetch();
+							info("executing SQL");
+							if (empty($result)) {
+								info("executed successfully");
+							} else {
+								log_error("unable to execute SQL");
+							}
+						} else {
+							info("[board] exists");
+						}
+
+						$stmt = $db->prepare('SELECT name FROM sqlite_master WHERE name="posts"');
+						info("prepared stmt");
+						$stmt->execute();
+						$result = $stmt->fetch();
+						info("executing SQL");
+						if(empty($result)) {
+							info("[posts] doesn't exist. creating...");
+
+							$stmt = $db->prepare('CREATE TABLE "posts" (
+							"boardurl"	TEXT NOT NULL,
+							"type"	TEXT NOT NULL,
+							"postid"	INTEGER NOT NULL,
+							"timestamp"	INTEGER NOT NULL DEFAULT "UNIXEPOCH()",
+							"ip"	TEXT NOT NULL,
+							"title"	INTEGER,
+							"name"	TEXT NOT NULL,
+							"text"	TEXT NOT NULL,
+							"attachmenturl"	TEXT,
+							"size"	INTEGER,
+							"filename"	TEXT,
+							"mime"	TEXT,
+							"replyto"	INTEGER,
+							PRIMARY KEY("postid" AUTOINCREMENT)
+						)');
+							info("prepared stmt (create posts)");
+							$stmt->execute();
+							$result = $stmt->fetch();
+							info("executing SQL");
+							if (empty($result)) {
+								info("executed successfully");
+							} else {
+								log_error("unable to execute SQL");
+							}
+						} else {
+							info("[posts] exists");
+						}
+
+						$stmt = $db->prepare('SELECT name FROM sqlite_master WHERE name="ipman"');
+						info("prepared stmt");
+						$stmt->execute();
+						$result = $stmt->fetch();
+						info("executing SQL");
+						if(empty($result)) {
+							info("[ipman] doesn't exist. creating...");
+							//TOOD: what tables should banned user managment have?
+						} else {
+							info("[ipman] exists");
+						}
 						break;
 					default:
 						log_error("unknown action");
@@ -271,7 +351,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
                 <form>
                     <fieldset>
                         <legend>update databases</legend>
-                        <p>Possibly destructive, use with caution.<br>checks the database for missing tables and creates them.</p>
+                        <p>Possibly destructive, use with caution.<br>Adds possibly missing tables and creates them.</p>
                         <input type="text" name="confirm" placeholder="'YES DO AS I SAY'">
                         <input type="submit" name="action" value="update databases">
                     </fieldset>
