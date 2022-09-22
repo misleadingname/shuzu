@@ -1,0 +1,14 @@
+http://localhost:8080 {
+	root public
+
+	php_fastcgi unix//run/php-fpm/php-fpm.sock {
+		index /index.php
+		try_files {path} {path}/index.php /index.php
+	}
+
+	file_server {
+		index off
+	}
+
+	try_files {path} {path}/index.php
+}
