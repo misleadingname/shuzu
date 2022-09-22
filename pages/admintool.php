@@ -1,7 +1,6 @@
 <?php
 
-require_once($_SERVER["DOCUMENT_ROOT"] . "/include/phpheader.php");
-require_once("$root/include/func.php");
+require_once("../include/phpheader.php");
 
 function info($message)
 {
@@ -10,13 +9,13 @@ function info($message)
 
 function log_error($message)
 {
-	print("<p><b>error:</b> $message</p><h3>[ <a href=\"/admintool.php\">back</a> ]</h3><h3>[ <a href=\"" . $_SERVER['REQUEST_URI'] . "\">retry</a> ]</h3>");
+//	print(" . $_SERVER['REQUEST_URI'] . "\">retry</a> ]</h3>");
 	exit();
 }
 
 function success($message)
 {
-	print("<p><b>SUCCESS:</b> $message</p><h3>[ <a href=\"/admintool.php\">back</a> ]</h3>");
+	print(">back</a> ]</h3>");
 	exit();
 }
 
@@ -24,12 +23,11 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 	header("WWW-Authenticate: Basic realm=\"shuzuAdminTool\"");
 	http_response_code(401);
 	$httpStatus = 401;
-	require_once("$root/log_error/index.php");
+	require_once("$root/log_error/error.php");
 	exit();
 } else {
 
-	if ($_GET["action"] != null || $_GET["action"] != "") {
-		include_once("$root/include/header.php");
+	if ($_POST["action"] != null || $_POST["action"] != "") {
 ?>
 		<div class="box">
 			<div class="boxbar">
@@ -37,20 +35,20 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 			</div>
 			<div class="boxinner">
 				<?php
-				switch ($_GET["action"]) {
+				switch ($_POST["action"]) {
 					case "delete board":
 						info("deleting board");
-						if ($_GET["confirm"] != "YES DO AS I SAY") {
+						if ($_POST["confirm"] != "YES DO AS I SAY") {
 							log_error("powerful action not confirmed");
 							break;
 						}
 						info("action confirmed");
-						if ($_GET["url"] == null || $_GET["url"] == "") {
+						if ($_POST["url"] == null || $_POST["url"] == "") {
 							log_error("no name given");
 							break;
 						}
 						
-						$url = htmlspecialchars($_GET["url"]);
+						$url = htmlspecialchars($_POST["url"]);
 
 						$stmt = $db->prepare("SELECT * FROM boards WHERE url = ?");
 						$stmt->execute(array($url));
@@ -74,18 +72,18 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 						}
 					case "create board":
 						info("creating board");
-						if ($_GET["url"] == null || $_GET["url"] == "") {
+						if ($_POST["url"] == null || $_POST["url"] == "") {
 							log_error("no name given");
 							break;
 						}
-						if ($_GET["description"] == null || $_GET["description"] == "") {
+						if ($_POST["description"] == null || $_POST["description"] == "") {
 							log_error("no description given");
 							break;
 						}
 						
-						$url = strtolower(htmlspecialchars($_GET["url"]));
-						$description = htmlspecialchars($_GET["description"]);
-						$nsfw = htmlspecialchars(intval($_GET["nsfw"]));
+						$url = strtolower(htmlspecialchars($_POST["url"]));
+						$description = htmlspecialchars($_POST["description"]);
+						$nsfw = htmlspecialchars(intval($_POST["nsfw"]));
 
 						info($nsfw);
 
@@ -107,7 +105,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 
 					case "wipe every board":
 						info("wiping every board");
-						if ($_GET["confirm"] != "YES DO AS I SAY") {
+						if ($_POST["confirm"] != "YES DO AS I SAY") {
 							log_error("powerful action not confirmed");
 							break;
 						}
@@ -124,7 +122,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 						break;
 					case "nuke":
 						info("nuking everything");
-						if ($_GET["confirm"] != "YES DO AS I SAY") {
+						if ($_POST["confirm"] != "YES DO AS I SAY") {
 							log_error("powerful action not confirmed");
 							break;
 						}
@@ -167,7 +165,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 							"boardurl"	TEXT NOT NULL,
 							"type"	TEXT NOT NULL,
 							"postid"	INTEGER NOT NULL,
-							"timestamp"	INTEGER NOT NULL DEFAULT "UNIXEPOCH()",
+							"timestamp"	INTEGER NOT NULL DEFAULT "CURRENT_TIMESTAMP",
 							"ip"	TEXT NOT NULL,
 							"title"	INTEGER,
 							"name"	TEXT NOT NULL,
@@ -207,7 +205,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 				<h3>board managment</h3>
 			</div>
 			<div class="boxinner">
-				<form>
+				<form method="POST">
 					<fieldset>
 						<legend>new board</legend>
 						<input type="text" name="url" placeholder="url">
@@ -218,7 +216,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 					</fieldset>
 				</form>
 
-				<form>
+				<form method="POST">
 					<fieldset>
 						<legend>delete board</legend>
 						<input type="text" name="url" placeholder="url">
@@ -227,7 +225,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 					</fieldset>
 				</form>
 
-				<form>
+				<form method="POST">
 					<fieldset>
 						<legend>edit description</legend>
 						<input type="text" name="url" placeholder="url">
@@ -252,7 +250,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 				<h3>!!! NUCLEAR OPTIONS !!!</h3>
 			</div>
 			<div class="boxinner">
-				<form>
+				<form method="POST">
 					<fieldset>
 						<legend>wipe every board</legend>
 						<input type="text" name="confirm" placeholder="'YES DO AS I SAY'">
@@ -260,7 +258,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 					</fieldset>
 				</form>
 
-				<form>
+				<form method="POST">
 					<fieldset>
 						<legend>nuke</legend>
 						<input type="text" name="confirm" placeholder="'YES DO AS I SAY'">
@@ -268,7 +266,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 					</fieldset>
 				</form>
 
-                <form>
+                <form method="POST">
                     <fieldset>
                         <legend>update databases</legend>
                         <p>Possibly destructive, use with caution.<br>checks the database for missing tables and creates them.</p>

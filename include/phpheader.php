@@ -1,17 +1,16 @@
 <?php
-$root = $_SERVER["DOCUMENT_ROOT"];
+$root = realpath($_SERVER["DOCUMENT_ROOT"]."/..");
+set_include_path(get_include_path() . PATH_SEPARATOR . $root);
 
-if(!file_exists("$root/config.php")) {
-	die("Can't find the configuration file!<br>Shuzu isn't configured!<br><br>please copy the config.default.php to config.php and edit it!");
-}
+require_once("func.php");
 
-require_once("$root/config.php");
+require_once("config.php");
 
 $request = $_SERVER['REQUEST_URI'];
 $splitRequest = explode("/", $request);
 
 if(!file_exists("$root/db/")) {
-	error_log("/db/ doesn't exist! creating one...");
+	error_log("db/ doesn't exist! creating one...");
 	mkdir("$root/db/", 0755, true);
 }
 

@@ -1,6 +1,5 @@
 <?php
-	require_once($_SERVER["DOCUMENT_ROOT"] . "/include/phpheader.php");
-	require_once("$root/include/func.php");
+	require_once("../../include/phpheader.php");
 
 	function errimg($roote) {
 		http_response_code(404);
@@ -8,7 +7,7 @@
 		$img = fopen("$roote/images/noimage.png", "r");
 
 		header("Content-Type: image/png");
-		header("Content-Length: " . filesize("$roote/images/noimage.png"));
+//		header("Content-Length: " . filesize("$roote/images/noimage.png"));
 
 		fpassthru($img);
 	}
@@ -26,24 +25,26 @@
 
 	$stmt = $db->query("SELECT attachmenturl, mime FROM posts WHERE postid = ?");
 	$stmt->execute([$postId]);
-	$result = $stmt->fetchAll();
+	$result = $stmt->fetch();
 
-	$attachmenturl = $result[0]["attachmenturl"];	// What the fuck???
-	$mime = $result[0]["mime"];						// Why in the actual fuck does it need $result[0] for?! WHYYYY.
+	$attachmenturl = $result["attachmenturl"];
+	$mime = $result["mime"];
 
 	if($attachmenturl == null) {
 		errimg($root);
 	}
 
-	if(file_exists($attachmenturl)) {
+    $file = "$root/public/usercontent/media/$attachmenturl";
+
+	if(file_exists($file)) {
 		if($thumb == "true") {
-			$attachmenturl = $attachmenturl . "_thumb.jpg";
+			$file = $file . "_thumb.jpg";
 		}
 
-		$img = fopen($attachmenturl, "r");
+		$img = fopen($file, "r");
 
 		header("Content-Type: $mime");
-		header("Content-Length: " . filesize($attachmenturl));
+//		header("Content-Length: " . filesize($attachmenturl));
 
 		fpassthru($img);
 	} else {

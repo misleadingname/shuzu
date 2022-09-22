@@ -1,7 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . "/include/phpheader.php");
-
-require_once("$root/include/func.php");
+require_once("../include/phpheader.php");
 
 $httpStatus = null;
 
