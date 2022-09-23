@@ -9,8 +9,8 @@ function info($message)
 
 function log_error($message)
 {
-//	print(" . $_SERVER['REQUEST_URI'] . "\">retry</a> ]</h3>");
-	exit();
+    print("<p><b>error:</b> $message</p><h3>[ <a href=\"/admintool.php\">back</a> ]</h3><h3>[ <a href=\"" . $_SERVER['REQUEST_URI'] . "\">retry</a> ]</h3>");
+    exit();
 }
 
 function success($message)
@@ -27,7 +27,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 	exit();
 } else {
 
-	if ($_POST["action"] != null || $_POST["action"] != "") {
+	if (!empty($_POST["action"])) {
 ?>
 		<div class="box">
 			<div class="boxbar">
@@ -48,7 +48,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 							break;
 						}
 						
-						$url = htmlspecialchars($_POST["url"]);
+						$url = $_POST["url"];
 
 						$stmt = $db->prepare("SELECT * FROM boards WHERE url = ?");
 						$stmt->execute(array($url));
@@ -81,9 +81,9 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
 							break;
 						}
 						
-						$url = strtolower(htmlspecialchars($_POST["url"]));
-						$description = htmlspecialchars($_POST["description"]);
-						$nsfw = htmlspecialchars(intval($_POST["nsfw"]));
+						$url = strtolower($_POST["url"]);
+						$description = $_POST["description"];
+						$nsfw = intval($_POST["nsfw"]);
 
 						info($nsfw);
 

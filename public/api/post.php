@@ -7,14 +7,14 @@
 
 //TODO: Implement captcha.
 
-	$board = htmlspecialchars($_POST["board"]);
-	$type = htmlspecialchars($_POST["type"]);
+	$board = $_POST["board"];
+	$type = $_POST["type"];
 	if ($type == "reply") {
-		$replyto = htmlspecialchars($_POST["replyto"]);
+		$replyto = $_POST["replyto"];
 	}
 
-	$name = htmlspecialchars($_POST["name"]);
-	$title = htmlspecialchars($_POST["title"]);
+	$name = $_POST["name"];
+	$title = $_POST["title"];
 	$content = trim($_POST["content"]);
 
 	$uploadedfile = $_FILES["attachment"];
@@ -31,7 +31,7 @@
 		error("No content specified.");
 	}
 
-	if ($type == "reply" && $title != null || $type == "reply" && $title != "") {
+	if ($type == "reply" && !empty($title)) {
 		error("Replies can't have titles.");
 	}
 
@@ -39,7 +39,7 @@
 		error("Title is too long, keep it under 32 characters.");
 	}
 
-	if ($type == "reply" && ($replyto == null || $replyto == "")) {
+	if ($type == "reply" && empty($replyto)) {
 		error("Nice inspect element.");
 	}
 
@@ -100,13 +100,13 @@
 	if ($type == "reply") {
 		?>
         <script>
-			window.location.replace("/<?php print("$board/thread/$replyto"); ?>")
+			//window.location.replace("/<?php //print("$board/thread/$replyto"); ?>//")
         </script>
 		<?php
 	} else {
 		?>
         <script>
-			window.location.replace("/<?php print($board); ?>")
+			//window.location.replace("/<?php //print($board); ?>//")
         </script>
 		<?php
 	}

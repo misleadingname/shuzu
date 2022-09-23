@@ -1,5 +1,5 @@
 <?php
-require_once("../include/captcha.php");
+require_once("include/captcha.php");
 print($_SESSION["phrase"])
 ?>
 <div class="half-size centered">
@@ -94,7 +94,7 @@ if ($threads == null) {
                 <img loading="lazy" src="/api/getimg.php?id=<?php print($thread["postid"]); ?>&thumb=true"><br>
                 <div>
                     <?php
-                    if ($thread["title"] != null || $thread["title"] != "") {
+                    if (!empty($thread["title"])) {
                         print("<b>" . $thread["title"] . "</b><br>");
                     }
                     ?>

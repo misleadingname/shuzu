@@ -12,7 +12,7 @@
 		fpassthru($img);
 	}
 
-	$postId = htmlspecialchars($_GET["id"]);
+	$postId = $_GET["id"];
 	$thumb = $_GET["thumb"] ?? false;
 
 	if($postId == null || $postId == "") {

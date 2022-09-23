@@ -20,16 +20,13 @@ if ($request == '/') {
     if ($splitRequest[1] == $board["url"] && !isset($splitRequest[2])) {
         require_once("pages/board.php");
     } else if ($splitRequest[2] == "thread") {
-        if ($splitRequest[3] != null || $splitRequest[3] != "") {
+        if (!empty($splitRequest[3])) {
             require_once("pages/thread.php");
-            require_once("include/footer.php");
         } else {
             http_response_code(404);
             require_once("pages/error.php");
-            require_once("include/footer.php");
         }
     } else {
-
         http_response_code(404);
         require_once("pages/error.php");
     }

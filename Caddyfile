@@ -1,4 +1,4 @@
-http://localhost:8080 {
+:8080 {
 	root public
 
 	php_fastcgi unix//run/php-fpm/php-fpm.sock {
