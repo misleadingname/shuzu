@@ -1,7 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . "/include/phpheader.php");
-
-require_once("$root/include/func.php");
+require_once("../include/phpheader.php");
 
 $httpStatus = null;
 
@@ -57,8 +55,6 @@ switch ($httpStatus) {
 		$httpMessage = "I'm a teapot";
 		break;
 }
-
-require_once("$root/include/header.php");
 ?>
 <div class="box">
 	<div class="boxbar">
@@ -67,7 +63,7 @@ require_once("$root/include/header.php");
 	<div class="boxinner">
 		<h1>Shame to be you!</h1>
 		<?php
-		$errDir = glob("$root/images/error/*.*");
+		$errDir = glob("$root/public/images/error/*.*");
 		$file = array_rand($errDir);
 
 		$localPath = path2url($errDir[$file]);
@@ -88,5 +84,3 @@ require_once("$root/include/header.php");
 		<h2>[ <a href="/">home</a> ]</h2>
 	</div>
 </div>
-<?php
-require_once("$root/include/footer.php");

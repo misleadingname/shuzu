@@ -7,7 +7,7 @@
 
 	if ($type != "post") {
 		http_response_code(404);
-		require_once("$root/error/index.php");
+		require_once("$root/error/error.php");
 		require_once("$root/include/footer.php");
 		exit();
 	}
@@ -23,7 +23,7 @@
             <h3>Reply to this thread:</h3>
         </div>
         <div class="boxinner">
-            <form action="/api/post" enctype="multipart/form-data" method="post">
+            <form action="/api/post.php" enctype="multipart/form-data" method="post">
                 <div class="flex-links">
                     <input hidden name="type" value="reply">
                     <input hidden name="replyto" value="<?php
@@ -64,8 +64,7 @@
 			?>
             <div id="<?= $reply["postid"] ?>" class="thread-reply">
                 <div class="reply-top">
-                    <span class="green bold"><?php
-                            print($reply["name"] . $op); ?></span> <?php
+                    <span class="green bold"><?= htmlspecialchars($reply["name"]) . $op ?></span> <?php
                             print(date("d/M/o G:i:s", $reply["timestamp"])); ?>
                         <a href="#<?=$reply["postid"] ?>">No.</a><a href="#<?=$reply["postid"] ?>" onclick="mention(event)"><?= $reply["postid"] ?></a>
                 </div>
@@ -80,18 +79,17 @@
 				?>
 
                 <blockquote class="reply-inner">
-					<?php if ($reply["attachmenturl"] != null || $reply["attachmenturl"] != "") {?>
-                            <a href="/api/getimg?id=<?= $reply['postid'] ?>" mime="<?=$reply["mime"] ?>" onclick="embed(event)" class="reply-image">
+					<?php if ($reply["attachmenturl"] != ".") {?>
+                            <a href="/api/getimg.php?id=<?= $reply['postid'] ?>" mime="<?=$reply["mime"] ?>" onclick="embed(event)" class="reply-image">
                                 <button class="hidden">Close video</button>
-                                <img src="/api/getimg?id=<?= $reply['postid'] ?>&thumb=true" alt="">
-                                <sup class="file-info"><?=$reply["filename"] . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>
+                                <img src="/api/getimg.php?id=<?= $reply['postid'] ?>&thumb=true" alt="">
+                                <sup class="file-info"><?=htmlspecialchars($reply["filename"]) . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>
                             </a>
 							<?php } ?>
                     <pre class="reply-text"><?php
-							if ($reply["title"] != null || $reply["title"] != "") {
+							if (!empty($reply["title"])) {
 								print("<b>" . $reply["title"] . "</b><br>");
 							}
-
 							$txt = $reply["text"];
 
 							$txt = htmlspecialchars($txt);

@@ -1,7 +1,5 @@
 <?php
-require_once($_SERVER["DOCUMENT_ROOT"] . "/include/phpheader.php");
-
-require_once("$root/include/header.php");
+require_once("../include/phpheader.php");
 ?>
 <div class="box">
 	<div class="boxbar">
@@ -52,4 +50,3 @@ require_once("$root/include/header.php");
 	</div>
 </div>
 <?php
-require_once("$root/include/footer.php");

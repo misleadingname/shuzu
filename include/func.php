@@ -10,9 +10,9 @@ function path2url($file) {
 		*  FIXME perhaps?
 		*/
 		$root = $_SERVER["DOCUMENT_ROOT"];
-		$board = htmlspecialchars($_POST["board"]);
+		$board = $_POST["board"];
 
-		require_once("$root/include/header.php");
+		require_once("include/header.php");
 
         http_response_code($code);
 		?>

@@ -1,5 +1,5 @@
 <?php
-require_once("$root/include/captcha.php");
+require_once("include/captcha.php");
 print($_SESSION["phrase"])
 ?>
 <div class="half-size centered">
@@ -14,7 +14,7 @@ print($_SESSION["phrase"])
 			<h3>Create a new thread:</h3>
 		</div>
 		<div class="boxinner">
-			<form action="/api/post" enctype="multipart/form-data" method="post">
+			<form action="/api/post.php" enctype="multipart/form-data" method="post">
 				<div class="flex-links">
 					<input hidden name="type" value="post">
 					<input hidden name="board" value="<?php print($splitRequest[1]); ?>">
@@ -50,8 +50,6 @@ print($_SESSION["phrase"])
 </div>
 
 <?php
-require_once("$root/include/func.php");
-
 $stmt = $db->prepare(<<<SQL
 SELECT *,
        (SELECT COALESCE(MAX(timestamp), p.timestamp)
@@ -93,19 +91,19 @@ if ($threads == null) {
                     print("<span class='mime'>GIF</span>");
                 }
 				?>
-				<img loading="lazy" src="/api/getimg?id=<?php print($thread["postid"]); ?>&thumb=true"><br>
-				<div>
-					<?php
-					if ($thread["title"] != null || $thread["title"] != "") {
-						print("<b>" . $thread["title"] . "</b><br>");
-					}
-					?>
-					<?php print($thread["text"]); ?>
-				</div>
-			</a>
-		</div>
-<?php
-	}
+                <img loading="lazy" src="/api/getimg.php?id=<?php print($thread["postid"]); ?>&thumb=true"><br>
+                <div>
+                    <?php
+                    if (!empty($thread["title"])) {
+                        print("<b>" . $thread["title"] . "</b><br>");
+                    }
+                    ?>
+                    <?php print($thread["text"]); ?>
+                </div>
+            </a>
+        </div>
+        <?php
+    }
 }
 ?>
 </div>

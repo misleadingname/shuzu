@@ -1,9 +1,7 @@
 <?php
-	require_once($_SERVER["DOCUMENT_ROOT"] . "/include/phpheader.php");
+	$insults = file("../include/insults.txt");
 
-	$insults = file("$root/include/insults.txt");
-
-    if($splitRequest[3] != "" || $splitRequest[3] != null) {
+    if(!empty($splitRequest[3])) {
 		$stmt = $db->prepare("SELECT * FROM posts WHERE postid=?");
 		$stmt->execute([$splitRequest[3]]);
 		$result = $stmt->fetch();
@@ -20,17 +18,17 @@
 		<link rel="stylesheet" href="/css/haven.css">
 
 		<?php
-			if ($splitRequest[3] != "" || $splitRequest[3] != null) {
+			if (isset($splitRequest[3])) {
                 $title = $result["title"];
             }
-			if($title == "") {
+			if(empty($title)) {
 				$title = "shuzu";
 			} else {
 				$title = "shuzu - " . $title;
 			}
 			print("<title>$title</title>");
 
-            if($result["text"] != "") {
+            if(!empty($result["text"])) {
                 if(strlen($result["text"]) > 32) {
                     $description = substr($result["text"], 0, 32) . "...\n\nread on shuzu.";
                 } else {

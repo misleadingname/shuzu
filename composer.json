@@ -7,6 +7,7 @@
 		
 	},
 	"require": {
-		"gregwar/captcha": "1.*"
-	}
+		"gregwar/captcha": "1.*",
+      "ext-pdo": "*"
+    }
 }
