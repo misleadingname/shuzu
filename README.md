@@ -64,7 +64,7 @@ Shuzu each time will pick a random banner.
 
 ## Good practice
 It's generally a good idea to do these if you ask me.
- - Restrict the users from accessing anything in `/include`.
+ - Restrict the users from accessing anything that isn't in `/public`.
  - Use a strong password for the administration tool, and don't share it at all.
  - Use SSL for god’s sake. (so many imageboards don't have SSL enabled.)
 
