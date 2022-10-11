@@ -31,12 +31,11 @@ Enable the general webserver file-serving, and execute php as normal.
 Caddy:
 ```caddy
 shuzu.example.com {
-	encode gzip
-
-	root * /srv/shuzu/
+	root public
 
 	php_fastcgi unix//run/php-fpm/php-fpm.sock {
 		index /index.php
+		try_files {path} {path}/index.php /index.php
 	}
 
 	file_server {
