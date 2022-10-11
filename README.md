@@ -50,9 +50,11 @@ shuzu.example.com {
 
 ### Configuring the database
 Shuzu **will not** work out of the box, it needs to be configured. Thankfully it's easy to do so.
- - After configuring the webserver, navigate to `/admintool.php` and authenticate with the login and password you set up earlier.
+ - After configuring the webserver, navigate to `/admintool` and authenticate with the login and password you set up earlier.
  - Look for the `!!! NUCLEAR OPTIONS !!!` section and click the `nuke` button.
  - After the database is nuked, you can start configuring everything else.
+  
+ *Do note, that the admintool isn't finished and is mostly in a dire state. pending rewrite.*
 
 ### Adding banners
 To add new banners, put your banner to `/images/banners/{board}` *(Create if doesn't exist)*.  
@@ -72,6 +74,7 @@ It's generally a good idea to do these if you ask me.
  - [x] Proper configuration file.
  - [ ] Sticky threads.
  - [ ] User banning.
+ - [ ] `admintool` rewrite.
  - [ ] Captcha.
 
 # Demo
