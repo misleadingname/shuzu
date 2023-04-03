@@ -2,6 +2,8 @@
 $root = realpath($_SERVER["DOCUMENT_ROOT"]."/..");
 set_include_path(get_include_path() . PATH_SEPARATOR . $root);
 
+session_start();
+
 require_once("func.php");
 
 require_once("config.php");

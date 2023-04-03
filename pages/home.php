@@ -64,12 +64,13 @@
 		</div>
 		<div class="boxinner">
 			<div class="flex-container">
-				<p>Hosted content:<br><?php print(number_format(GetDirectorySize("$root/usercontent") / 1024, 2, ".", ".")); ?> <b>KB</b></p>
+				<p>Hosted content:<br><?php
+					print(number_format(GetDirectorySize("$root/usercontent") / 1024, 2, ".", "."));
+				?> <b>KB</b></p>
 				<p>Hosting:<br>
 					<?php
 						$stmt = $db->query("SELECT COUNT(*) FROM 'posts'");
 						
-
 						print($stmt->fetchColumn());
 					?>
 				<b> posts.</b></p>

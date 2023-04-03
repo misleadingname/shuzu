@@ -1,6 +1,5 @@
 <?php
 require_once("include/captcha.php");
-print($_SESSION["phrase"])
 ?>
 <div class="half-size centered">
 

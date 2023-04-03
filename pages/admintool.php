@@ -23,7 +23,7 @@ if (!isset($_SERVER["PHP_AUTH_USER"]) || !isset($_SERVER["PHP_AUTH_PW"]) || $_SE
     header("WWW-Authenticate: Basic realm=\"shuzuAdminTool\"");
     http_response_code(401);
     $httpStatus = 401;
-    require_once("$root/log_error/error.php");
+    require_once("$root/pages/error.php");
     exit();
 } else {
 

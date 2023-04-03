@@ -22,7 +22,7 @@ require_once("../include/phpheader.php");
 				<ul>
 					<li>Troll posts.</li>
 					<li>Racism.</li>
-					<li>Pornography (unless allowed in a NSFW board.).</li>
+					<li>Pornography.</li>
 					<li>Dubs or GET posts, including 'Roll for X' images.</li>
 				</ul>
 			<li>You will not post any of the following <b>AT ALL</b>:
