@@ -10,6 +10,13 @@ if ($request == '/') {
     require_once("pages/home.php");
 } else if ($request == '/admintool') {
     require_once('pages/admintool.php');
+} else if (str_starts_with($request, '/admintools')) {
+    require_once("./api/admintools/verify.php");
+    if ($request == "/admintools") {
+        require_once("pages/admintools/index.php");
+    } else {
+        require_once("pages/admintools/" . substr($request, 12) . ".php");
+    }
 } else if ($request == '/rules') {
     require_once('pages/rules.php');
 } else {

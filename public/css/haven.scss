@@ -415,6 +415,25 @@ hr {
 
 }
 
+table {
+	border-collapse: collapse;
+	
+	width: 100%;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 0.25em;
+}
+
+tr:nth-child(even) {
+	background-color: gainsboro;
+}
+
+tr.expired {
+	background-color: lightcoral;
+}
+
 /* FOOTER */
 
 .footer {

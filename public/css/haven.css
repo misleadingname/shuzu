@@ -82,6 +82,7 @@ hr {
 }
 
 .fit {
+  width: -moz-fit-content;
   width: fit-content;
 }
 
@@ -265,6 +266,7 @@ hr {
 /* THREAD */
 .path {
   font-size: large;
+  width: -moz-fit-content;
   width: fit-content;
   margin: 1em auto 1em auto;
 }
@@ -276,6 +278,7 @@ hr {
 
 .thread-reply {
   display: block;
+  width: -moz-fit-content;
   width: fit-content;
   margin-right: auto;
   margin-bottom: 0.5em;
@@ -288,7 +291,8 @@ hr {
 }
 .thread-reply img, .thread-reply video {
   margin-right: 0.5em;
-  object-fit: none;
+  -o-object-fit: none;
+     object-fit: none;
 }
 .thread-reply .fullImage {
   width: 100% !important;
@@ -302,7 +306,9 @@ hr {
 }
 .thread-reply .reply-inner {
   display: inline-block;
+  width: -moz-fit-content;
   width: fit-content;
+  height: -moz-fit-content;
   height: fit-content;
   margin: 0;
   padding: 1.5em;
@@ -340,9 +346,25 @@ hr {
   background-color: dimgray;
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border: 1px solid black;
+  padding: 0.25em;
+}
+
+tr:nth-child(even) {
+  background-color: gainsboro;
+}
+
+tr.expired {
+  background-color: lightcoral;
+}
+
 /* FOOTER */
 .footer {
   text-align: center;
-}
-
-/*# sourceMappingURL=haven.css.map */
+}/*# sourceMappingURL=haven.css.map */
