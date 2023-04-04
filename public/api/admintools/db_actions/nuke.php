@@ -67,7 +67,7 @@ if (empty($result)) {
 }
 
 $stmt = $db->prepare('CREATE TABLE "bans" (
-	"ip"	TEXT NOT NULL UNIQUE,
+	"ip"	TEXT NOT NULL,
 	"timestamp"	INTEGER NOT NULL DEFAULT "CURRENT_TIMESTAMP",
 	"reason"	TEXT NOT NULL,
 	"boards"	TEXT NOT NULL,

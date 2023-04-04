@@ -194,6 +194,14 @@ hr {
 
 /* BOARD PAGE */
 
+.board-list {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+
+	width: 100%
+}
+
 .board-title {
 	font-size: 3.5em;
 	margin-top: 36px;
@@ -327,8 +335,9 @@ hr {
 }
 
 .thread {
-	width: 90%;
-	margin: 8px;
+	width: 98%;
+	margin: auto;
+	margin-top: 2em;
 }
 
 .thread-reply {
@@ -394,7 +403,7 @@ hr {
 
 		.reply-text {
 			font-family: 'Times New Roman', Times, serif;
-			display: inline;
+			display: inline-block;
 
 			margin: 0;
 			padding: 0;

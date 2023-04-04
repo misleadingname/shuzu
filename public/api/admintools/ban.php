@@ -15,7 +15,7 @@ $stmt = $db->prepare("SELECT * FROM bans WHERE ip = ?");
 $stmt->execute([$ip]);
 $banned = $stmt->fetch();
 
-if ($banned != null) {
+if ($banned != null && $banned["expires"] == 0 || $banned["expires"] > time()) {
 	die("This IP address is already banned.");
 }
 

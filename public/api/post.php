@@ -19,8 +19,8 @@
 	$lastpost = $stmt->fetch();
 
 	if ($lastpost != null) {
-		if (time() - $lastpost["timestamp"] < 60) {
-			die("You can only post every 60 seconds.");
+		if (time() - $lastpost["timestamp"] < 30) {
+			die("You can only post every 30 seconds.");
 		}
 	}
 
