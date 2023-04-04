@@ -12,7 +12,7 @@
 			<div class="flex-container">
 				<h2><a href="/admintools/bans">Bans</a></h2>
 				<h2><a href="/admintools/boards">Boards</a></h2>
-				<h2><a href="/admintools/threads">Posts</a></h2>
+				<h2><a href="/admintools/posts">Posts</a></h2>
 				<h2><a href="/admintools/db">DB</a></h2>
 			</div>
 		</div>

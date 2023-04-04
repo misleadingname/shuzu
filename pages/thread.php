@@ -7,11 +7,21 @@
 
 	if ($type != "post") {
 		http_response_code(404);
-		require_once("$root/error/error.php");
+		require_once("$root/pages/error.php");
 		require_once("$root/include/footer.php");
 		exit();
 	}
 
+	$stmt = $db->prepare("SELECT boardurl FROM posts WHERE postid=?");
+	$stmt->execute([$splitRequest[3]]);
+	$board = $stmt->fetch()[0];
+
+	if ($board != $splitRequest[1]) {
+		http_response_code(404);
+		require_once("$root/pages/error.php");
+		require_once("$root/include/footer.php");
+		exit();
+	}
 ?>
 
 <p class="path"><?php

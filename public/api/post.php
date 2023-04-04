@@ -1,6 +1,8 @@
 <?php
 	require_once("../../include/phpheader.php");
 
+	session_start();
+
 	$stmt = $db->prepare("SELECT * FROM bans WHERE ip = ?");
 	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
 	$ban = $stmt->fetch();
@@ -18,11 +20,11 @@
 	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
 	$lastpost = $stmt->fetch();
 
-	if ($lastpost != null) {
-		if (time() - $lastpost["timestamp"] < 30) {
-			die("You can only post every 30 seconds.");
-		}
-	}
+	// if ($lastpost != null) {
+	// 	if (time() - $lastpost["timestamp"] < 30) {
+	// 		die("You can only post every 30 seconds.");
+	// 	}
+	// }
 
 	$allowed_types = ["image/webp", "video/webm", "video/mp4", "audio/webm", "image/png", "image/jpeg", "image/gif"];
 
@@ -39,46 +41,46 @@
 	$uploadedfile = $_FILES["attachment"];
 
 	if ($uploadedfile["error"] != 0 && $type == "post") {
-		error("Something went wrong with uploading the attachment.");
+		die("Something went wrong with uploading the attachment.");
 	}
 
 	if (empty($name)) {
-		error("No name specified.");
-	}
+		die("No name specified.");
+	} 
 
 	if (empty($content)) {
-		error("No content specified.");
+		die("No content specified.");
 	}
 
 	if ($type == "reply" && !empty($title)) {
-		error("Replies can't have titles.");
+		die("Replies can't have titles.");
 	}
 
-	if (strlen($title) > 32) {
-		error("Title is too long, keep it under 32 characters.");
+	if (strlen($title) > 48) {
+		die("Title is too long, keep it under 48 characters.");
 	}
 
 	if ($type == "reply" && empty($replyto)) {
-		error("Nice inspect element.");
+		die("Nice inspect element.");
 	}
 
 	if ($type == "post" && $uploadedfile["error"] == 4) {
-		error("No file attached to a thread.");
+		die("No file attached to a thread.");
 	}
 
 	if ($uploadedfile["size"] / 1000 > 3000) {
-		error("File over 3MB.");
+		die("File over 3MB.");
 	}
 
 	if (!in_array($uploadedfile["type"], $allowed_types, true) && $uploadedfile["error"] != 4) {
-		error("Incorrect file type.");
+		die("Incorrect file type.");
 	}
 
 	if ($uploadedfile["error"] == 0) {
 		if (!file_exists("$root/public/usercontent/media/")) {
 			error_log("media directory doesn't exist! creating one...", 0);
 			if (!mkdir("$root/public/usercontent/media", 0755, true)) {
-				error("Internal server error, NOT SHUZHU'S FAULT! THIS ISN'T A BUG!");
+				die("Internal server error, NOT SHUZHU'S FAULT! THIS ISN'T A BUG!");
 				exit();
 			}
 		}
@@ -111,7 +113,7 @@
 	$result = $stmt->fetchAll();
 
 	if ($result != null) {
-		error("Unknown error.");
+		die("Unknown error.");
 	} else {
 		print("Posted!");
 	}
