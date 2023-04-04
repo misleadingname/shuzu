@@ -27,7 +27,7 @@
 			<h3>Boards</h3>
 		</div>
 		<div class="boxinner">
-			<div class="flex-container fullImage">
+			<div class="flex-container">
 				<div class="board-list">
 					<?php
 					$stmt = $db->prepare("SELECT * FROM boards");
