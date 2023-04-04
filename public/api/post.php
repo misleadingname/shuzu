@@ -1,11 +1,30 @@
 <?php
-	session_start();
-
 	require_once("../../include/phpheader.php");
 
-	$allowed_types = ["image/webp", "video/webm", "video/mp4", "audio/webm", "image/png", "image/jpeg", "image/gif"];
+	$stmt = $db->prepare("SELECT * FROM bans WHERE ip = ?");
+	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
+	$ban = $stmt->fetch();
 
-//TODO: Implement captcha.
+	if ($ban != null) {
+		if ($ban["expires"] == 0 || $ban["expires"] > time()) {
+			if ($ban["boards"] == "*" || in_array($_POST["board"], explode(",", $ban["boards"]), true)) {
+				header("Location: /banned");
+				exit();
+			}
+		}
+	}
+
+	$stmt = $db->prepare("SELECT * FROM posts WHERE ip = ? ORDER BY timestamp DESC LIMIT 1");
+	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
+	$lastpost = $stmt->fetch();
+
+	if ($lastpost != null) {
+		if (time() - $lastpost["timestamp"] < 60) {
+			die("You can only post every 60 seconds.");
+		}
+	}
+
+	$allowed_types = ["image/webp", "video/webm", "video/mp4", "audio/webm", "image/png", "image/jpeg", "image/gif"];
 
 	$board = $_POST["board"];
 	$type = $_POST["type"];

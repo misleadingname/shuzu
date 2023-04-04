@@ -13,7 +13,7 @@
 		<h3>Database Management</h3>
 	</div>
 	<div class="boxinner">
-		<form action="/api/admintools/db" method="post" enctype="multipart/form-data">
+		<form action="/api/admintools/db_action.php" method="post" enctype="multipart/form-data">
 				<div class="flex-links">
 				<select name="action">
 					<option value="nuke">Nuke the database</option>
@@ -21,7 +21,7 @@
 					<option value="wipebans">Delete all bans</option>
 					<option value="wipemedia">Delete all media</option>
 				</select>
-				<input type="text" name="Confirmation" placeholder="Type 'I absolutely understand what I am doing'" required>
+				<input type="text" name="confirmation" placeholder="Type 'I absolutely understand what I am doing'" required>
 				<input type="submit" value="Execute">
 			</div>
 		</form>

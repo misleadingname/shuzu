@@ -1,5 +1,5 @@
 body {
-	font-family: 'Times New Roman', Times, serif;
+	font-family: serif;
 	width: 100%;
 	margin-right: 0;
 	margin-left: 0;
@@ -81,7 +81,7 @@ hr {
 /* OTHER */
 
 .document {
-	width: 60em;
+	max-width: 60em;
 	min-width: 750px;
 	margin: auto;
 }

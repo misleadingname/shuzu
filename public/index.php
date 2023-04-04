@@ -19,6 +19,8 @@ if ($request == '/') {
     }
 } else if ($request == '/rules') {
     require_once('pages/rules.php');
+} else if ($request == '/banned') {
+    require_once('pages/banned.php');
 } else {
     $stmt = $db->prepare("SELECT * FROM boards WHERE url = ?");
     $stmt->execute([$splitRequest[1]]);
