@@ -32,10 +32,12 @@
 	$type = $_POST["type"];
 	if ($type == "reply") {
 		$replyto = $_POST["replyto"];
+		$title = "";
+	} else {
+		$title = $_POST["title"];
 	}
 
 	$name = $_POST["name"];
-	$title = $_POST["title"];
 	$content = trim($_POST["content"]);
 
 	$uploadedfile = $_FILES["attachment"];
@@ -91,6 +93,9 @@
 		move_uploaded_file($uploadedfile["tmp_name"], $target);
 
 		thumbnail($target);
+	} else {
+		$hash = null;
+		$ext = null;
 	}
 
 	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto)");
@@ -104,11 +109,11 @@
             "name" => $name,
             "title" => $title,
             "text" => $content,
-            "size" => $uploadedfile['size'],
-            "filename" => $uploadedfile["name"],
-            "mime" => $uploadedfile["type"],
+            "size" => $uploadedfile['size'] ?? null,
+            "filename" => $uploadedfile["name"] ?? null,
+            "mime" => $uploadedfile["type"] ?? null,
 
-            "attachmenturl" => $hash . ".$ext"
+            "attachmenturl" => $hash . ".$ext" ?? null
     ]);
 	$result = $stmt->fetchAll();
 
@@ -118,16 +123,22 @@
 		print("Posted!");
 	}
 
+	$stmt = $db->prepare("SELECT * FROM posts WHERE ip = ? ORDER BY timestamp DESC LIMIT 1");
+	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
+	$post = $stmt->fetch();
+
+	$postid = $post["postid"];
+
 	if ($type == "reply") {
 		?>
         <script>
-			//window.location.replace("/<?php //print("$board/thread/$replyto"); ?>//")
+			window.location.replace("/<?php print("$board/thread/$replyto#$postid"); ?>")
         </script>
 		<?php
 	} else {
 		?>
         <script>
-			//window.location.replace("/<?php //print($board); ?>//")
+			window.location.replace("/<?php print($board); ?>//")
         </script>
 		<?php
 	}

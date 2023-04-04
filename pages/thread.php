@@ -80,6 +80,10 @@
 				$op = "";
 			}
 
+			if ($reply["ip"] == $_SERVER["REMOTE_ADDR"]) {
+				$op .= " (You)";
+			}
+
 			?>
             <div id="<?= $reply["postid"] ?>" class="thread-reply">
                 <div class="reply-top">
