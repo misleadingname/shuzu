@@ -1,52 +1,49 @@
 <?php
-	require_once("../../include/phpheader.php");
+require_once("../../include/phpheader.php");
+$postId = $_GET["id"];
+$thumb = $_GET["thumb"] ?? false;
 
-	function errimg($roote) {
-		http_response_code(404);
+error_reporting(0);
 
-		$img = fopen("$roote/images/noimage.png", "r");
+$stmt = $db->query("SELECT attachmenturl, mime FROM posts WHERE postid = ?");
+$stmt->execute([$postId]);
+$result = $stmt->fetch();
 
-		header("Content-Type: image/png");
-//		header("Content-Length: " . filesize("$roote/images/noimage.png"));
+$attachmenturl = $result["attachmenturl"];
+$mime = $result["mime"];
 
-		fpassthru($img);
+if($attachmenturl == null) {
+	http_response_code(404);
+
+	$img = fopen("$root/public/images/noimage.png", "rb");
+
+	header("Content-Type: image/png");
+	header("Content-Length: " . filesize("$root/public/images/noimage.png"));
+
+	fpassthru($img);
+	exit();
+}
+
+$file = "$root/public/usercontent/media/$attachmenturl";
+
+if(file_exists($file)) {
+	if($thumb == "true") {
+		$file = $file . "_thumb.jpg";
 	}
 
-	$postId = $_GET["id"];
-	$thumb = $_GET["thumb"] ?? false;
+	$img = fopen($file, "r");
 
-	if($postId == null || $postId == "") {
-		errimg($root);
-	}
+	header("Content-Type: $mime");
+	header("Content-Length: " . filesize($file));
 
-	if(!is_numeric($postId)) {
-		errimg($root);
-	}
+	fpassthru($img);
+} else {
+	http_response_code(404);
 
-	$stmt = $db->query("SELECT attachmenturl, mime FROM posts WHERE postid = ?");
-	$stmt->execute([$postId]);
-	$result = $stmt->fetch();
+	$img = fopen("$root/public/images/noimage.png", "r");
 
-	$attachmenturl = $result["attachmenturl"];
-	$mime = $result["mime"];
+	header("Content-Type: image/png");
+	header("Content-Length: " . filesize("$root/public/images/noimage.png"));
 
-	if($attachmenturl == null) {
-		errimg($root);
-	}
-
-    $file = "$root/public/usercontent/media/$attachmenturl";
-
-	if(file_exists($file)) {
-		if($thumb == "true") {
-			$file = $file . "_thumb.jpg";
-		}
-
-		$img = fopen($file, "r");
-
-		header("Content-Type: $mime");
-//		header("Content-Length: " . filesize($attachmenturl));
-
-		fpassthru($img);
-	} else {
-		errimg($root);
-	}
+	fpassthru($img);
+}

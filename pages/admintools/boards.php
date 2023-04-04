@@ -11,8 +11,12 @@ $boards = $stmt->fetchAll();
 	<div class="boxinner">
 		<div class="flex-links">
 			<form action="/api/admintools/board.php" method="post" enctype="multipart/form-data">
-				<input type="text" name="name" placeholder="Name" required>
+				<input type="hidden" name="type" value="create">
 				<input type="text" name="url" placeholder="URL" required>
+				<input type="text" name="desc" placeholder="Description" required>
+				<div>
+					<input type="checkbox" name="nsfw">NSFW
+				</div>
 				<input type="submit" value="Create">
 			</form>
 		</div>
@@ -75,12 +79,27 @@ $boards = $stmt->fetchAll();
 	<div class="boxinner">
 		<div class="flex-links fullImage">
 			<form action="/api/admintools/board.php" method="post" class="fullImage" enctype="multipart/form-data">
+				<input type="hidden" name="type" value="update">
 				<input type="text" name="url" placeholder="URL" required>
-				<select name="setting" required>
-					<option value="desc">Description</option>
-					<option value="nsfw">NSFW</option>
+				<input type="text" name="desc" placeholder="Description" required>
 				<input type="submit" value="Update">
 			</form>
 		</div>
 	</div>
 </div>`
+
+<div class="box">
+	<div class="boxbar">
+		<h3>Board delete</h3>
+	</div>
+	<div class="boxinner">
+		<div class="flex-links fullImage">
+			<form action="/api/admintools/board.php" method="post" class="fullImage" enctype="multipart/form-data">
+				<input type="hidden" name="type" value="delete">
+				<input type="text" name="url" placeholder="URL" required>
+				<input type="text" name="url-again" placeholder="URL again" required>
+				<input type="submit" value="Delete">
+			</form>
+		</div>
+	</div>
+</div>

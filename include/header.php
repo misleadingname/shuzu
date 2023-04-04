@@ -18,7 +18,7 @@
 		<link rel="stylesheet" href="/css/haven.css">
 
 		<?php
-			if (isset($splitRequest[3])) {
+			if (isset($splitRequest[3]) && !empty($result["title"])) {
                 $title = $result["title"];
             }
 			if(empty($title)) {

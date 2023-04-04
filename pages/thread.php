@@ -3,7 +3,16 @@
 
 	$stmt = $db->prepare("SELECT type FROM posts WHERE postid=?");
 	$stmt->execute([$splitRequest[3]]);
-	$type = $stmt->fetch()[0];
+	$result = $stmt->fetch();
+
+	if ($result == null) {
+		http_response_code(404);
+		require_once("$root/pages/error.php");
+		require_once("$root/include/footer.php");
+		exit();
+	}
+
+	$type = $result[0];
 
 	if ($type != "post") {
 		http_response_code(404);

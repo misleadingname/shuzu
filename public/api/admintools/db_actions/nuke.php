@@ -1,4 +1,7 @@
 <?php
+
+print("Nuking database...<br><br>");
+
 if (isset($db)) {
 	print("Connected to the database, disconnecting...<br>");
 	$db = null;

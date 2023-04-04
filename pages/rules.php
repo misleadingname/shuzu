@@ -3,7 +3,7 @@ require_once("../include/phpheader.php");
 ?>
 <div class="box">
 	<div class="boxbar">
-		<h3>rules</h3>
+		<h3>Rules</h3>
 	</div>
 	<div class="boxinner">
 		<p>By using this website (the "site"), you agree that you'll follow these rules, and understand that if we reasonably think you haven't followed these rules, we may (at our own discretion) terminate your access to the site.</p>
@@ -12,16 +12,15 @@ require_once("../include/phpheader.php");
 </div>
 <div class="box">
 	<div class="boxbar">
-		<h3>global rules</h3>
+		<h3>Global rules</h3>
 	</div>
 	<div class="boxinner" style="text-align: left;">
 		<ol>
 			<li>You will not upload, post, discuss, request, or link to anything that violates local law where this shuzu instance is located (Poland).</li>
-			<li>You will immediately cease and not continue to access the site if you are under the age of 18.</li>
+			<li>You will immediately cease and not continue to access the site if you are under the age of 16.</li>
 			<li>You will not post any of the following outside of <sup><span class="red bold">(NSFW)</span></sup> boards:
 				<ul>
 					<li>Troll posts.</li>
-					<li>Racism.</li>
 					<li>Pornography.</li>
 					<li>Dubs or GET posts, including 'Roll for X' images.</li>
 				</ul>

@@ -26,7 +26,10 @@ if ($request == '/') {
     $stmt->execute([$splitRequest[1]]);
     $board = $stmt->fetch();
 
-    if ($splitRequest[1] == $board["url"] && !isset($splitRequest[2])) {
+    if ($board == null) {
+        http_response_code(404);
+        require_once("pages/error.php");
+    } elseif ($splitRequest[1] == $board["url"] && !isset($splitRequest[2])) {
         require_once("pages/board.php");
     } else if ($splitRequest[2] == "thread") {
         if (!empty($splitRequest[3])) {
