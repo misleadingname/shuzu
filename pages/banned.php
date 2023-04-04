@@ -4,7 +4,7 @@ $stmt->execute([$_SERVER["REMOTE_ADDR"]]);
 $stmt->execute();
 $banned = $stmt->fetch();
 
-if($banned != null && $banned["expires"] > time()) {
+if($banned != null && $banned["expires"] < time()) {
 	$reason = "You are banned in participating in the following boards:<br>" . $banned["boards"] . "<br>For the following reason:<br><code>" . $banned["reason"] . "</code>";
 	if ($banned["boards"] == "*") {
 		$reason = "You are banned from participating in <b>all</b> boards for the following reason:<br><code>" . $banned["reason"] . "</code>";
