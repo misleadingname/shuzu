@@ -57,8 +57,9 @@ SELECT *,
 FROM posts p
 WHERE boardurl = ?
   AND type = 'post'
-ORDER BY bump DESC;
+ORDER BY sticky DESC, bump DESC;
 SQL);
+
 $stmt->execute([$BUMP_LIMIT,$splitRequest[1]]);
 $threads = $stmt->fetchAll();
 
@@ -88,6 +89,8 @@ if ($threads == null) {
                     print("<span class='mime'>MP4</span>");
                 } elseif($thread["mime"] == "image/gif") {
                     print("<span class='mime'>GIF</span>");
+                } elseif($thread["sticky"] == 1) {
+                    print("<span class='mime'>STICKY</span>");
                 }
 				?>
                 <img loading="lazy" src="/api/getimg.php?id=<?php print($thread["postid"]); ?>&thumb=true"><br>

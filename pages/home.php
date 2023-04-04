@@ -33,24 +33,12 @@
 					$stmt = $db->prepare("SELECT * FROM boards");
 					$stmt->execute();
 					$boards = $stmt->fetchAll();
-					$i = 0;
 					foreach ($boards as $board) {
-						$i++;
-
 						print("<div><a href=\"/" . $board["url"] . "\">/" . $board["url"] . "/</a>");
 						if ($board["nsfw"] == 1) {
 							print("<sup><span class=\"red bold\">(NSFW)</span></sup>");
 						}
 						print("</div>");
-
-
-						if ($i == sizeof($boards)) {
-							break;
-						}
-
-						if ($i % 5 == 0) {
-							print("</div><div class=\"flex-links\">");
-						}
 					}
 					?>
 				</div>

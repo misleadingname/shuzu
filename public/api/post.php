@@ -20,11 +20,11 @@
 	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
 	$lastpost = $stmt->fetch();
 
-	// if ($lastpost != null) {
-	// 	if (time() - $lastpost["timestamp"] < 30) {
-	// 		die("You can only post every 30 seconds.");
-	// 	}
-	// }
+	if ($lastpost != null) {
+		if (time() - $lastpost["timestamp"] < 30) {
+			die("You can only post every 30 seconds.");
+		}
+	}
 
 	$allowed_types = ["image/webp", "video/webm", "video/mp4", "audio/webm", "image/png", "image/jpeg", "image/gif"];
 
@@ -35,6 +35,20 @@
 		$title = "";
 	} else {
 		$title = $_POST["title"];
+	}
+
+	if ($type == "reply") {
+		$stmt = $db->prepare("SELECT * FROM posts WHERE postid = ?");
+		$stmt->execute([$replyto]);
+		$thread = $stmt->fetch();
+
+		if ($thread == null) {
+			die("Thread doesn't exist.");
+		}
+
+		if ($thread["locked"] == 1) {
+			die("Thread is locked.");
+		}
 	}
 
 	$name = $_POST["name"];
@@ -98,7 +112,7 @@
 		$ext = null;
 	}
 
-	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto)");
+	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto, sticky, locked) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto, :sticky, :locked)");
 
 	$stmt->execute([
             "boardurl" => $board,
@@ -112,8 +126,9 @@
             "size" => $uploadedfile['size'] ?? null,
             "filename" => $uploadedfile["name"] ?? null,
             "mime" => $uploadedfile["type"] ?? null,
-
-            "attachmenturl" => $hash . ".$ext" ?? null
+            "attachmenturl" => $hash . ".$ext" ?? null,
+			"sticky" => 0,
+			"locked" => 0,
     ]);
 	$result = $stmt->fetchAll();
 
@@ -138,7 +153,7 @@
 	} else {
 		?>
         <script>
-			window.location.replace("/<?php print($board); ?>//")
+			window.location.replace("/<?php print($board); ?>/thread/<?php print($postid); ?>")
         </script>
 		<?php
 	}

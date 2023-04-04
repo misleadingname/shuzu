@@ -10,10 +10,10 @@ if ($board != null) {
     die("Board already exists.");
 }
 
-if (isset($_POST["url"]) && isset($_POST["desc"]) && isset($_POST["nsfw"])) {
+if (isset($_POST["url"]) && isset($_POST["desc"])) {
     $url = $_POST["url"];
     $desc = $_POST["desc"];
-    $nsfw = $_POST["nsfw"];
+    $nsfw = $_POST["nsfw"] ?? "off";
     if ($nsfw == "on") {
         $nsfw = 1;
     } else {
