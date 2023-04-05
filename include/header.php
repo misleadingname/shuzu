@@ -53,10 +53,9 @@
 
 			<div class="box">
 				<div class="boxbar">
-					<h3>Announcement</h3>
+					<h3>Today's changes</h3>
 				</div>
 				<div class="boxinner">
-					<h3>Today's changes:</h3>
 					<ul>
 						<li>Fixed a major XSS flaw.</li>
 						<li>Hopefully improved the site for mobile.</li>
