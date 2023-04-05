@@ -88,7 +88,7 @@
 		<div class="boxinner">
 			<div class="flex-container">
 				<p>Hosted content:<br><?php
-					print(number_format(GetDirectorySize("$root/pubpc/usercontent") / 1024 / 1024, 2, ".", "."));
+					print(number_format(GetDirectorySize("$root/public/usercontent") / 1024 / 1024, 2, ".", "."));
 				?> <b>MB</b></p>
 				<p>Hosting:<br>
 					<?php
