@@ -138,10 +138,10 @@
 
 							//$txt = str_replace("\n", '<br>');
 							print($txt); ?></pre>
-						<?php if ($reply["attachmenturl"] != ".") {?>
-							<sup class="file-info"><?=htmlspecialchars($reply["filename"]) . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>
-						<?php } ?>
 					</div>
+					<?php if ($reply["attachmenturl"] != ".") {?>
+						<sup class="file-info"><?=htmlspecialchars($reply["filename"]) . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>
+					<?php } ?>
 				</blockquote>
 			</div>
 			<?php
