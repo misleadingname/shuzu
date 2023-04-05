@@ -66,8 +66,8 @@
 		<div class="boxinner">
 			<div class="flex-container">
 				<p>Hosted content:<br><?php
-					print(number_format(GetDirectorySize("$root/usercontent") / 1024, 2, ".", "."));
-				?> <b>KB</b></p>
+					print(number_format(GetDirectorySize("$root/public/usercontent") / 1024 / 1024, 2, ".", "."));
+				?> <b>MB</b></p>
 				<p>Hosting:<br>
 					<?php
 						$stmt = $db->query("SELECT COUNT(*) FROM 'posts'");
