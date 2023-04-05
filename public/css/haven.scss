@@ -308,6 +308,10 @@ hr {
 		max-width: 150px;
 		box-shadow: 0 4px 8px 0 darkgray, 0 6px 20px 0 gray;
 	}
+
+	@media (max-width: 768px) {
+		color: red;
+	}
 }
 
 .mime {
