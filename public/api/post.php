@@ -3,16 +3,14 @@
 
 	session_start();
 
-	$stmt = $db->prepare("SELECT * FROM bans WHERE ip = ?");
+	$stmt = $db->prepare("SELECT * FROM bans WHERE ip = ? AND expires > strftime('%s', 'now') OR expires = 0; LIMIT 1;");
 	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
 	$ban = $stmt->fetch();
 
 	if ($ban != null) {
-		if ($ban["expires"] == 0 || $ban["expires"] > time()) {
-			if ($ban["boards"] == "*" || in_array($_POST["board"], explode(",", $ban["boards"]), true)) {
-				header("Location: /banned");
-				exit();
-			}
+		if ($ban["boards"] == "*" || in_array($_POST["board"], explode(",", $ban["boards"]), true)) {
+			header("Location: /banned");
+			exit();
 		}
 	}
 
