@@ -97,10 +97,10 @@ if ($threads == null) {
                 <div>
                     <?php
                     if (!empty($thread["title"])) {
-                        print("<b>" . $thread["title"] . "</b><br>");
+                        print("<b>" . htmlspecialchars($thread["title"]) . "</b><br>");
                     }
                     ?>
-                    <?php print($thread["text"]); ?>
+                    <?php print(htmlspecialchars($thread["text"])); ?>
                 </div>
             </a>
         </div>

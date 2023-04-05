@@ -122,7 +122,7 @@
 								<?php } ?>
 	                    <pre class="reply-text"><?php
 								if (!empty($reply["title"])) {
-									print("<b>" . $reply["title"] . "</b><br>");
+									print("<b>" . htmlspecialchars($reply["title"]) . "</b><br>");
 								}
 								$txt = $reply["text"];
 
@@ -134,7 +134,9 @@
 								$txt = preg_replace("/\*(.+?)\*/", '<i>$1</i>', $txt);
 								$txt = preg_replace("/`(.+?)`/", '<code>$1</code>', $txt);
 
-	                            //$txt = str_replace("\n", '<br>');
+							$txt = preg_replace("/(https?:\/\/[^\s]+)/", '<a href="$1">$1</a>', $txt);
+
+                            //$txt = str_replace("\n", '<br>');
 
 								print($txt); ?>
 						</pre>
