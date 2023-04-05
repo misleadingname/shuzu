@@ -310,7 +310,9 @@ hr {
 	}
 
 	@media (max-width: 768px) {
-		color: red;
+		width: 90%;
+		max-height: 100%;
+		margin: 0.25em auto 0.25em auto;
 	}
 }
 
