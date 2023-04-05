@@ -117,7 +117,7 @@
 						<?php if ($reply["attachmenturl"] != ".") {?>
 								<a href="/api/getimg.php?id=<?= $reply['postid'] ?>" mime="<?=$reply["mime"] ?>" onclick="embed(event)" class="reply-image">
 									<button class="hidden">Close video</button>
-									<img src="/api/getimg.php?id=<?= $reply['postid'] ?>&thumb=true" alt="">
+									<img loading="lazy" src="/api/getimg.php?id=<?= $reply['postid'] ?>&thumb=true" alt="">
 								</a>
 								<?php } ?>
 						<pre class="reply-text"><?php
