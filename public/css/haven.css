@@ -1,10 +1,11 @@
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
 body {
   font-family: serif;
-  width: 100%;
-  margin-right: 0;
-  margin-left: 0;
-  padding-right: 0;
-  padding-left: 0;
+  margin: auto;
   background: url("/images/background.png") repeat-x center top local lightgray;
 }
 
@@ -46,7 +47,7 @@ hr {
   font-size: large;
   position: relative;
   z-index: 999;
-  overflow: visible !important;
+  overflow: hidden !important;
   width: 380px;
   margin: 0;
   padding: 0;
@@ -55,6 +56,11 @@ hr {
   animation-iteration-count: infinite;
   animation-direction: alternate;
   color: yellow;
+}
+@media (max-width: 768px) {
+  .splash {
+    display: none;
+  }
 }
 
 @keyframes splashBounce {
@@ -68,12 +74,16 @@ hr {
 /* OTHER */
 .document {
   max-width: 60em;
-  min-width: 750px;
   margin: auto;
 }
 
 .half-size {
   width: 50%;
+}
+@media (max-width: 768px) {
+  .half-size {
+    width: 90%;
+  }
 }
 
 .centered {
@@ -90,7 +100,7 @@ hr {
 .logo {
   width: 320px;
   height: 120px;
-  margin: 0 auto;
+  margin: auto auto;
   padding: 0;
   background-image: url("/images/logo.png");
   background-repeat: no-repeat;
@@ -243,6 +253,11 @@ hr {
   max-width: 150px;
   box-shadow: 0 4px 8px 0 darkgray, 0 6px 20px 0 gray;
 }
+@media (max-width: 768px) {
+  .catalog-thread {
+    width: 60%;
+  }
+}
 
 .mime {
   position: absolute;
@@ -303,7 +318,8 @@ hr {
      object-fit: none;
 }
 .thread-reply .fullImage {
-  width: 100% !important;
+  width: -moz-max-content !important;
+  width: max-content !important;
 }
 .thread-reply .reply-top {
   display: block;

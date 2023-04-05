@@ -1,11 +1,12 @@
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
 body {
 	font-family: serif;
-	width: 100%;
-	margin-right: 0;
-	margin-left: 0;
-	padding-right: 0;
 
-	padding-left: 0;
+	margin: auto;
 
 	background: url("/images/background.png") repeat-x center top local lightgray;
 }
@@ -53,7 +54,7 @@ hr {
 	position: relative;
 
 	z-index: 999;
-	overflow: visible !important;
+	overflow: hidden !important;
 
 	width: 380px;
 	margin: 0;
@@ -66,6 +67,10 @@ hr {
 	animation-iteration-count: infinite;
 	animation-direction: alternate;
 	color: yellow;
+
+	@media (max-width: 768px) {
+		display: none;
+	}
 }
 
 @keyframes splashBounce {
@@ -82,12 +87,15 @@ hr {
 
 .document {
 	max-width: 60em;
-	min-width: 750px;
 	margin: auto;
 }
 
 .half-size {
 	width: 50%;
+
+	@media (max-width: 768px) {
+		width: 90%;
+	}
 }
 
 .centered {
@@ -105,7 +113,7 @@ hr {
 	width: 320px;
 	height: 120px;
 
-	margin: 0 auto;
+	margin: auto auto;
 	padding: 0;
 	background-image: url("/images/logo.png");
 
@@ -293,6 +301,10 @@ hr {
 		max-width: 150px;
 		box-shadow: 0 4px 8px 0 darkgray, 0 6px 20px 0 gray;
 	}
+
+	@media (max-width: 768px) {
+		width: 60%;
+	}
 }
 
 .mime {
@@ -359,7 +371,7 @@ hr {
 	}
 
 	.fullImage {
-		width: 100% !important;
+		width: max-content !important;
 	}
 
 	.reply-top {
