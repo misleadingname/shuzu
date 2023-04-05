@@ -341,14 +341,15 @@ hr {
   height: -moz-fit-content;
   height: fit-content;
   margin: 0;
-  padding: 1.5em;
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
 }
 .thread-reply .reply-inner .file-info {
   display: block;
 }
 .thread-reply .reply-inner .reply-image {
   display: inline-block;
-  float: left;
   text-decoration: none;
   color: black;
 }
