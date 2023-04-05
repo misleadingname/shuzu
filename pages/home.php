@@ -16,7 +16,7 @@
 				<h3>JavaScript is disabled</h3>
 			</div>
 			<div class="boxinner">
-				<p>Even though that JavaScript is completely optional, You'll lose on some quality of life features.</p>
+				<p>Even though that JavaScript is completely optional, You'll lose on some quapty of pfe features.</p>
 				<p><i>Note: This messsage only appears here.</i></p>
 			</div>
 		</div>
@@ -27,11 +27,33 @@
 			<h3>Today's changes</h3>
 		</div>
 		<div class="boxinner">
-			<ul>
-				<li>Fixed a major XSS flaw.</li>
-				<li>Hopefully improved the site for mobile.</li>
-				<li>Even <b>more</b> css mobile fixes.</li>
-			</ul>
+			<p>Fixed a major XSS flaw.</p>
+			<p>Hopefully improved the site for mobile.</p>
+			<p>Even <b>more</b> css mobile fixes.</p>
+			<p>"Today's Quote"</p>
+		</div>
+	</div>
+
+	<div class="box">
+		<div class="boxbar"><h3>Today's quote</h3></div>
+		<div class="boxinner">
+			<div style="width: fit-content;margin: auto;">
+				<?php
+				$stmt = $db->prepare("SELECT COUNT(*) FROM posts WHERE timestamp < strftime('%s', 'now') - (strftime('%s', 'now') % 86400);");
+				$stmt->execute();
+				$result = $stmt->fetch()[0];
+
+				srand(date("dmy"));
+				$random = rand(0, $result);
+
+				$stmt = $db->prepare("SELECT * FROM posts WHERE postid < ? AND type = 'reply' ORDER BY postid DESC LIMIT 1;");
+				$stmt->execute([$random]);
+				$result = $stmt->fetch();
+
+				print("<p style='font-size: 1.5em; margin: 0;'><i>" . $result["text"] . "</i></p>");
+				print("<p style='margin: 0;text-align: right;'><b>-" . $result["name"] . "</b></p>");
+			?>
+			</div>
 		</div>
 	</div>
 
@@ -66,7 +88,7 @@
 		<div class="boxinner">
 			<div class="flex-container">
 				<p>Hosted content:<br><?php
-					print(number_format(GetDirectorySize("$root/public/usercontent") / 1024 / 1024, 2, ".", "."));
+					print(number_format(GetDirectorySize("$root/pubpc/usercontent") / 1024 / 1024, 2, ".", "."));
 				?> <b>MB</b></p>
 				<p>Hosting:<br>
 					<?php

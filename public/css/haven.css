@@ -135,7 +135,6 @@ hr {
 }
 
 .box {
-  zoom: 100%;
   margin-bottom: 0.5em;
   border: 1px solid;
   background: white;
@@ -145,6 +144,7 @@ hr {
   zoom: 100%;
   text-align: center;
   background: lightgray;
+  width: 100%;
 }
 .box .boxbar * {
   zoom: 100%;
