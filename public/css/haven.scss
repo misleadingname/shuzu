@@ -401,7 +401,7 @@ hr {
 		padding: 1em;
 
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 
 		.file-info {
 			display: block;
@@ -442,6 +442,11 @@ hr {
 				border-radius: 4px;
 				background-color: dimgray;
 			}
+		}
+
+		.reply-body {
+			display: flex;
+			flex-direction: row;
 		}
 	}
 

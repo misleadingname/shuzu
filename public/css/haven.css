@@ -349,7 +349,7 @@ hr {
   margin: 0;
   padding: 1em;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .thread-reply .reply-inner .file-info {
   display: block;
@@ -381,6 +381,10 @@ hr {
   color: white;
   border-radius: 4px;
   background-color: dimgray;
+}
+.thread-reply .reply-inner .reply-body {
+  display: flex;
+  flex-direction: row;
 }
 
 table {

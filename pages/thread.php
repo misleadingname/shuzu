@@ -113,7 +113,7 @@
 				?>
 
 				<blockquote class="reply-inner">
-					<div>
+					<div class="reply-body">
 						<?php if ($reply["attachmenturl"] != ".") {?>
 								<a href="/api/getimg.php?id=<?= $reply['postid'] ?>" mime="<?=$reply["mime"] ?>" onclick="embed(event)" class="reply-image">
 									<button class="hidden">Close video</button>
