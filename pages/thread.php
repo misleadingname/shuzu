@@ -140,7 +140,9 @@
 
 								print($txt); ?>
 						</pre>
-	                    <sup class="file-info"><?=htmlspecialchars($reply["filename"]) . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>
+						<?php if ($reply["attachmenturl"] != ".") {?>
+	                 	   <sup class="file-info"><?=htmlspecialchars($reply["filename"]) . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>
+						<?php } ?>
 					</div>
                 </blockquote>
             </div>
