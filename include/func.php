@@ -1,9 +1,10 @@
 <?php
 function path2url($file) {
+	print($SERVER_['DOCUMENT_ROOT']);
     return str_replace($_SERVER['DOCUMENT_ROOT'], '', $file);
 }
 
-	function error($reason, $code = 400) {
+function error($reason, $code = 400) {
 		/*
 		*  HACK: For some reason php loses the track of the $root, $db, $request variables as soon as i execute a function.
 		*  The only needed variables is $root for this function, but it's really strange that php loses them.
@@ -49,7 +50,7 @@ function path2url($file) {
 		<?php
 		require_once("$root/include/footer.php");
 		die();
-	}
+}
 
 function thumbnail($file) {
     $imagick = new Imagick(realpath($file));
