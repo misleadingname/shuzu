@@ -122,7 +122,7 @@
 							<?php } ?>
                     <pre class="reply-text"><?php
 							if (!empty($reply["title"])) {
-								print("<b>" . $reply["title"] . "</b><br>");
+								print("<b>" . htmlspecialchars($reply["title"]) . "</b><br>");
 							}
 							$txt = $reply["text"];
 
