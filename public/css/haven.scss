@@ -265,10 +265,12 @@ hr {
 /* CATALOG */
 
 .catalog {
-	align-items: center;
-
 	width: 90%;
 	margin: auto;
+
+	@media (max-width: 768px) {
+		text-align: center;
+	}
 }
 
 .catalog-thread {
@@ -305,10 +307,6 @@ hr {
 	img {
 		max-width: 150px;
 		box-shadow: 0 4px 8px 0 darkgray, 0 6px 20px 0 gray;
-	}
-
-	@media (max-width: 768px) {
-		width: 60%;
 	}
 }
 
