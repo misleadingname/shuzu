@@ -227,9 +227,13 @@ hr {
 
 /* CATALOG */
 .catalog {
-  align-items: center;
   width: 90%;
   margin: auto;
+}
+@media (max-width: 768px) {
+  .catalog {
+    text-align: center;
+  }
 }
 
 .catalog-thread {
@@ -261,7 +265,9 @@ hr {
 }
 @media (max-width: 768px) {
   .catalog-thread {
-    width: 60%;
+    width: 90%;
+    max-height: 100%;
+    margin: 0.25em auto 0.25em auto;
   }
 }
 
@@ -341,14 +347,15 @@ hr {
   height: -moz-fit-content;
   height: fit-content;
   margin: 0;
-  padding: 1.5em;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
 }
 .thread-reply .reply-inner .file-info {
   display: block;
 }
 .thread-reply .reply-inner .reply-image {
   display: inline-block;
-  float: left;
   text-decoration: none;
   color: black;
 }
@@ -374,6 +381,10 @@ hr {
   color: white;
   border-radius: 4px;
   background-color: dimgray;
+}
+.thread-reply .reply-inner .reply-body {
+  display: flex;
+  flex-direction: row;
 }
 
 table {

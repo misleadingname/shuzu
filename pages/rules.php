@@ -7,7 +7,7 @@ require_once("../include/phpheader.php");
 	</div>
 	<div class="boxinner">
 		<p>By using this website (the "site"), you agree that you'll follow these rules, and understand that if we reasonably think you haven't followed these rules, we may (at our own discretion) terminate your access to the site.</p>
-		<p>If you're fammiliar with 4chan's rules. this shouldn't be an issue.</p>
+		<p>If you're familiar with 4chan's rules. this shouldn't be an issue.</p>
 	</div>
 </div>
 <div class="box">

@@ -30,6 +30,7 @@
 			<ul>
 				<li>Fixed a major XSS flaw.</li>
 				<li>Hopefully improved the site for mobile.</li>
+				<li>Even <b>more</b> css mobile fixes.</li>
 			</ul>
 		</div>
 	</div>
