@@ -113,30 +113,33 @@
 				?>
 
                 <blockquote class="reply-inner">
-					<?php if ($reply["attachmenturl"] != ".") {?>
-                            <a href="/api/getimg.php?id=<?= $reply['postid'] ?>" mime="<?=$reply["mime"] ?>" onclick="embed(event)" class="reply-image">
-                                <button class="hidden">Close video</button>
-                                <img src="/api/getimg.php?id=<?= $reply['postid'] ?>&thumb=true" alt="">
-                                <sup class="file-info"><?=htmlspecialchars($reply["filename"]) . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>
-                            </a>
-							<?php } ?>
-                    <pre class="reply-text"><?php
-							if (!empty($reply["title"])) {
-								print("<b>" . $reply["title"] . "</b><br>");
-							}
-							$txt = $reply["text"];
+					<div>
+						<?php if ($reply["attachmenturl"] != ".") {?>
+	                            <a href="/api/getimg.php?id=<?= $reply['postid'] ?>" mime="<?=$reply["mime"] ?>" onclick="embed(event)" class="reply-image">
+	                                <button class="hidden">Close video</button>
+	                                <img src="/api/getimg.php?id=<?= $reply['postid'] ?>&thumb=true" alt="">
+	                            </a>
+								<?php } ?>
+	                    <pre class="reply-text"><?php
+								if (!empty($reply["title"])) {
+									print("<b>" . $reply["title"] . "</b><br>");
+								}
+								$txt = $reply["text"];
 
-							$txt = htmlspecialchars($txt);
-							$txt = preg_replace('/&gt;&gt;(\d*)/', "<a class=\"mention\" href=\"/$splitRequest[1]/thread/$splitRequest[3]#$1\">>>$1</a>", $txt);
-							$txt = preg_replace("/(^|\n)&gt;.*/", '<span class="green">$0</span>', $txt);
+								$txt = htmlspecialchars($txt);
+								$txt = preg_replace('/&gt;&gt;(\d*)/', "<a class=\"mention\" href=\"/$splitRequest[1]/thread/$splitRequest[3]#$1\">>>$1</a>", $txt);
+								$txt = preg_replace("/(^|\n)&gt;.*/", '<span class="green">$0</span>', $txt);
 
-							$txt = preg_replace("/\*\*(.+?)\*\*/", '<b>$1</b>', $txt);
-							$txt = preg_replace("/\*(.+?)\*/", '<i>$1</i>', $txt);
-							$txt = preg_replace("/`(.+?)`/", '<code>$1</code>', $txt);
+								$txt = preg_replace("/\*\*(.+?)\*\*/", '<b>$1</b>', $txt);
+								$txt = preg_replace("/\*(.+?)\*/", '<i>$1</i>', $txt);
+								$txt = preg_replace("/`(.+?)`/", '<code>$1</code>', $txt);
 
-                            //$txt = str_replace("\n", '<br>');
+	                            //$txt = str_replace("\n", '<br>');
 
-							print($txt); ?></pre>
+								print($txt); ?>
+						</pre>
+	                    <sup class="file-info"><?=htmlspecialchars($reply["filename"]) . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>
+					</div>
                 </blockquote>
             </div>
 			<?php

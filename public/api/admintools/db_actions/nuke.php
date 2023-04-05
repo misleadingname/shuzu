@@ -73,11 +73,10 @@ if (empty($result)) {
 
 $stmt = $db->prepare('CREATE TABLE "bans" (
 	"ip"	TEXT NOT NULL,
-	"timestamp"	INTEGER NOT NULL DEFAULT "CURRENT_TIMESTAMP",
-	"reason"	TEXT NOT NULL,
-	"boards"	TEXT NOT NULL,
-	"expires"	INTEGER NOT NULL,
-	PRIMARY KEY("ip")
+	"timestamp"	INTEGER NOT NULL DEFAULT 0,
+	"reason"	TEXT NOT NULL DEFAULT "No reason given",
+	"boards"	TEXT NOT NULL DEFAULT "*",
+	"expires"	INTEGER NOT NULL DEFAULT 0,
 )');
 print("Prepared STMT (create bans)<br>");
 
