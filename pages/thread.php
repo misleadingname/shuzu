@@ -134,6 +134,8 @@
 							$txt = preg_replace("/\*(.+?)\*/", '<i>$1</i>', $txt);
 							$txt = preg_replace("/`(.+?)`/", '<code>$1</code>', $txt);
 
+							$txt = preg_replace("/(https?:\/\/[^\s]+)/", '<a href="$1">$1</a>', $txt);
+
                             //$txt = str_replace("\n", '<br>');
 
 							print($txt); ?></pre>

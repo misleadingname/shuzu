@@ -50,15 +50,3 @@
 				</div>
 				<hr>
 			</div>
-
-			<div class="box">
-				<div class="boxbar">
-					<h3>Today's changes</h3>
-				</div>
-				<div class="boxinner">
-					<ul>
-						<li>Fixed a major XSS flaw.</li>
-						<li>Hopefully improved the site for mobile.</li>
-					</ul>
-				</div>
-			</div>
