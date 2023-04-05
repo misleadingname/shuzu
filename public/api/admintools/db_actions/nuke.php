@@ -42,9 +42,9 @@ if (empty($result)) {
 }
 
 $stmt = $db->prepare('CREATE TABLE "posts" (
+	"postid"	INTEGER NOT NULL,
 	"boardurl"	TEXT NOT NULL,
 	"type"	TEXT NOT NULL,
-	"postid"	INTEGER NOT NULL,
 	"timestamp"	INTEGER NOT NULL DEFAULT "CURRENT_TIMESTAMP",
 	"ip"	TEXT NOT NULL,
 	"title"	INTEGER,
@@ -55,6 +55,8 @@ $stmt = $db->prepare('CREATE TABLE "posts" (
 	"filename"	TEXT,
 	"mime"	TEXT,
 	"replyto"	INTEGER,
+	"sticky"	INTEGER,
+	"locked"	INTEGER,
 	PRIMARY KEY("postid" AUTOINCREMENT)
 )');
 print("Prepared STMT (create posts)<br>");

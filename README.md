@@ -72,10 +72,7 @@ It's generally a good idea to do these if you ask me.
  - [x] ~~Working~~ Functional release.
  - [x] Fix media handling.
  - [x] Proper configuration file.
- - [ ] Sticky threads.
- - [ ] User banning.
- - [ ] `admintool` rewrite.
- - [ ] Captcha.
-
-# Demo
-A full instance of shuzu is available at [shuzu.new-japannt.tk](https://shuzu.new-japannt.tk/), have fun!
+ - [x] Sticky threads.
+ - [x] User banning.
+ - [x] `admintool` rewrite.
+ - [x] Full release!!!

@@ -33,9 +33,18 @@
 	}
 ?>
 
-<p class="path"><?php
-		print("<a href=\"/$splitRequest[1]\">" . $splitRequest[1] . "</a> - " . $splitRequest[3]); ?></p>
+<p class="path"><?php print("<a href=\"/$splitRequest[1]\">" . $splitRequest[1] . "</a> - " . $splitRequest[3]); ?></p>
+<?php
+	$stmt = $db->prepare("SELECT locked FROM posts WHERE postid=?");
+	$stmt->execute([$splitRequest[3]]);
+	$locked = $stmt->fetch()[0];
 
+	if ($locked == 1) {
+		?>
+			<h1 class="board-title">This thread is locked.</h1>
+			<p class="board-description">You cannot reply to this thread.</p>
+		<?php
+	} else { ?>
 <div class="half-size centered">
     <div class="box">
         <div class="boxbar">
@@ -62,13 +71,15 @@
     <hr>
 
 </div>
-</div>
 
 <?php
+	}
+
 	$stmt = $db->prepare("SELECT * FROM posts WHERE replyto=? OR postid=?");
 	$stmt->execute([$splitRequest[3],$splitRequest[3]]);
 	$replies = $stmt->fetchAll();
 ?>
+</div>
 
 <div class="thread">
 	<?php
@@ -78,6 +89,10 @@
 				$op = " (OP)";
 			} else {
 				$op = "";
+			}
+
+			if ($reply["ip"] == $_SERVER["REMOTE_ADDR"]) {
+				$op .= " (You)";
 			}
 
 			?>

@@ -20,11 +20,11 @@
 	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
 	$lastpost = $stmt->fetch();
 
-	// if ($lastpost != null) {
-	// 	if (time() - $lastpost["timestamp"] < 30) {
-	// 		die("You can only post every 30 seconds.");
-	// 	}
-	// }
+	if ($lastpost != null) {
+		if (time() - $lastpost["timestamp"] < 30) {
+			die("You can only post every 30 seconds.");
+		}
+	}
 
 	$allowed_types = ["image/webp", "video/webm", "video/mp4", "audio/webm", "image/png", "image/jpeg", "image/gif"];
 
@@ -32,10 +32,26 @@
 	$type = $_POST["type"];
 	if ($type == "reply") {
 		$replyto = $_POST["replyto"];
+		$title = "";
+	} else {
+		$title = $_POST["title"];
+	}
+
+	if ($type == "reply") {
+		$stmt = $db->prepare("SELECT * FROM posts WHERE postid = ?");
+		$stmt->execute([$replyto]);
+		$thread = $stmt->fetch();
+
+		if ($thread == null) {
+			die("Thread doesn't exist.");
+		}
+
+		if ($thread["locked"] == 1) {
+			die("Thread is locked.");
+		}
 	}
 
 	$name = $_POST["name"];
-	$title = $_POST["title"];
 	$content = trim($_POST["content"]);
 
 	$uploadedfile = $_FILES["attachment"];
@@ -91,9 +107,12 @@
 		move_uploaded_file($uploadedfile["tmp_name"], $target);
 
 		thumbnail($target);
+	} else {
+		$hash = null;
+		$ext = null;
 	}
 
-	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto)");
+	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto, sticky, locked) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto, :sticky, :locked)");
 
 	$stmt->execute([
             "boardurl" => $board,
@@ -104,11 +123,12 @@
             "name" => $name,
             "title" => $title,
             "text" => $content,
-            "size" => $uploadedfile['size'],
-            "filename" => $uploadedfile["name"],
-            "mime" => $uploadedfile["type"],
-
-            "attachmenturl" => $hash . ".$ext"
+            "size" => $uploadedfile['size'] ?? null,
+            "filename" => $uploadedfile["name"] ?? null,
+            "mime" => $uploadedfile["type"] ?? null,
+            "attachmenturl" => $hash . ".$ext" ?? null,
+			"sticky" => 0,
+			"locked" => 0,
     ]);
 	$result = $stmt->fetchAll();
 
@@ -118,16 +138,22 @@
 		print("Posted!");
 	}
 
+	$stmt = $db->prepare("SELECT * FROM posts WHERE ip = ? ORDER BY timestamp DESC LIMIT 1");
+	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
+	$post = $stmt->fetch();
+
+	$postid = $post["postid"];
+
 	if ($type == "reply") {
 		?>
         <script>
-			//window.location.replace("/<?php //print("$board/thread/$replyto"); ?>//")
+			window.location.replace("/<?php print("$board/thread/$replyto#$postid"); ?>")
         </script>
 		<?php
 	} else {
 		?>
         <script>
-			//window.location.replace("/<?php //print($board); ?>//")
+			window.location.replace("/<?php print($board); ?>/thread/<?php print($postid); ?>")
         </script>
 		<?php
 	}
