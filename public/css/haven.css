@@ -76,6 +76,12 @@ hr {
   max-width: 60em;
   margin: auto;
 }
+@media (max-width: 768px) {
+  .document {
+    max-width: 100%;
+    margin: 0;
+  }
+}
 
 .half-size {
   width: 50%;
