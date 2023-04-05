@@ -1,6 +1,6 @@
 <?php
 function path2url($file) {
-	print($SERVER_['DOCUMENT_ROOT']);
+	print($_SERVER['DOCUMENT_ROOT']);
     return str_replace($_SERVER['DOCUMENT_ROOT'], '', $file);
 }
 
