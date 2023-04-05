@@ -46,29 +46,29 @@
 		<?php
 	} else { ?>
 <div class="half-size centered">
-    <div class="box">
-        <div class="boxbar">
-            <h3>Reply to this thread:</h3>
-        </div>
-        <div class="boxinner">
-            <form action="/api/post.php" enctype="multipart/form-data" method="post">
-                <div class="flex-links">
-                    <input hidden name="type" value="reply">
-                    <input hidden name="replyto" value="<?php
+	<div class="box">
+		<div class="boxbar">
+			<h3>Reply to this thread:</h3>
+		</div>
+		<div class="boxinner">
+			<form action="/api/post.php" enctype="multipart/form-data" method="post">
+				<div class="flex-links">
+					<input hidden name="type" value="reply">
+					<input hidden name="replyto" value="<?php
 						print($splitRequest[3]); ?>">
-                    <input hidden name="board" value="<?php
+					<input hidden name="board" value="<?php
 						print($splitRequest[1]); ?>">
-                    <input type="text" name="name" placeholder="Name" value="Anonymous" required>
-                    <textarea id="replyTextarea" name="content" placeholder="Content" required></textarea>
-                    <input type="file" name="attachment">
-                    <p>Files up to 3MB are allowed.</p><sup>WEBM, WEBP, MP4, PNG, JPG, GIF.</sup>
-                    <input type="submit" value="Post">
-                </div>
-            </form>
-        </div>
-    </div>
+					<input type="text" name="name" placeholder="Name" value="Anonymous" required>
+					<textarea id="replyTextarea" name="content" placeholder="Content" required></textarea>
+					<input type="file" name="attachment">
+					<p>Files up to 3MB are allowed.</p><sup>WEBM, WEBP, MP4, PNG, JPG, GIF.</sup>
+					<input type="submit" value="Post">
+				</div>
+			</form>
+		</div>
+	</div>
 
-    <hr>
+	<hr>
 
 </div>
 
@@ -96,12 +96,12 @@
 			}
 
 			?>
-            <div id="<?= $reply["postid"] ?>" class="thread-reply">
-                <div class="reply-top">
-                    <span class="green bold"><?= htmlspecialchars($reply["name"]) . $op ?></span> <?php
-                            print(date("d/M/o G:i:s", $reply["timestamp"])); ?>
-                        <a href="#<?=$reply["postid"] ?>">No.</a><a href="#<?=$reply["postid"] ?>" onclick="mention(event)"><?= $reply["postid"] ?></a>
-                </div>
+			<div id="<?= $reply["postid"] ?>" class="thread-reply">
+				<div class="reply-top">
+					<span class="green bold"><?= htmlspecialchars($reply["name"]) . $op ?></span> <?php
+							print(date("d/M/o G:i:s", $reply["timestamp"])); ?>
+						<a href="#<?=$reply["postid"] ?>">No.</a><a href="#<?=$reply["postid"] ?>" onclick="mention(event)"><?= $reply["postid"] ?></a>
+				</div>
 				<?php
 					if ($reply["mime"] == "image/gif") {
 						print("<span class='mime-hack'>GIF</span>");
@@ -112,15 +112,15 @@
 					}
 				?>
 
-                <blockquote class="reply-inner">
+				<blockquote class="reply-inner">
 					<div>
 						<?php if ($reply["attachmenturl"] != ".") {?>
-	                            <a href="/api/getimg.php?id=<?= $reply['postid'] ?>" mime="<?=$reply["mime"] ?>" onclick="embed(event)" class="reply-image">
-	                                <button class="hidden">Close video</button>
-	                                <img src="/api/getimg.php?id=<?= $reply['postid'] ?>&thumb=true" alt="">
-	                            </a>
+								<a href="/api/getimg.php?id=<?= $reply['postid'] ?>" mime="<?=$reply["mime"] ?>" onclick="embed(event)" class="reply-image">
+									<button class="hidden">Close video</button>
+									<img src="/api/getimg.php?id=<?= $reply['postid'] ?>&thumb=true" alt="">
+								</a>
 								<?php } ?>
-	                    <pre class="reply-text"><?php
+						<pre class="reply-text"><?php
 								if (!empty($reply["title"])) {
 									print("<b>" . htmlspecialchars($reply["title"]) . "</b><br>");
 								}
@@ -136,16 +136,14 @@
 
 							$txt = preg_replace("/(https?:\/\/[^\s]+)/", '<a href="$1">$1</a>', $txt);
 
-                            //$txt = str_replace("\n", '<br>');
-
-								print($txt); ?>
-						</pre>
+							//$txt = str_replace("\n", '<br>');
+							print($txt); ?></pre>
 						<?php if ($reply["attachmenturl"] != ".") {?>
-	                 	   <sup class="file-info"><?=htmlspecialchars($reply["filename"]) . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>
+							<sup class="file-info"><?=htmlspecialchars($reply["filename"]) . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>
 						<?php } ?>
 					</div>
-                </blockquote>
-            </div>
+				</blockquote>
+			</div>
 			<?php
 		}
 	?>
