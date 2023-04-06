@@ -22,17 +22,14 @@
 		</div>
 	</noscript>
 
-	<div class="box">
+	<!-- <div class="box">
 		<div class="boxbar">
 			<h3>Today's changes</h3>
 		</div>
 		<div class="boxinner">
-			<p>Fixed a major XSS flaw.</p>
-			<p>Hopefully improved the site for mobile.</p>
-			<p>Even <b>more</b> css mobile fixes.</p>
-			<p>"Today's Quote"</p>
+			<p>None today.</p>
 		</div>
-	</div>
+	</div> -->
 
 	<div class="box">
 		<div class="boxbar"><h3>Today's quote</h3></div>
