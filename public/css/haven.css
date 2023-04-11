@@ -178,6 +178,34 @@ hr {
   justify-content: flex-start;
 }
 
+.flex-v {
+  display: flex;
+  align-content: flex-start;
+  align-items: flex-start;
+  align-self: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.flex-h {
+  display: flex;
+  align-content: flex-start;
+  align-items: flex-start;
+  align-self: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.center-flex {
+  align-content: center;
+  align-items: center;
+  align-self: center;
+}
+
+.sep * {
+  margin: 0.25em;
+}
+
 /* BOARD PAGE */
 .board-list {
   display: flex;

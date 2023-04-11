@@ -110,8 +110,38 @@
 		$ext = null;
 	}
 
-	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto, sticky, locked) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto, :sticky, :locked)");
+	$stmt = $db->prepare("SELECT * FROM boards WHERE boardurl = ? LIMIT 1");
+	$stmt->execute([$board]);
+	$board = $stmt->fetch();
 
+	if ($board == null) {
+		die("Board doesn't exist.");
+	}
+
+	$stmt = $db->prepare("SELECT * FROM posts WHERE boardurl = ? ORDER BY timestamp DESC, 1");
+	$stmt->execute([$board]);
+	$posts = $stmt->fetchAll();
+
+	if (count($posts) > 100) {
+		$oldest = $posts[count($posts) - 1];
+		$oldestid = $oldest["postid"];
+		$oldesthash = $oldest["attachmenturl"];
+		$oldestext = pathinfo($oldesthash, PATHINFO_EXTENSION);
+		$oldesthash = str_replace(".$oldestext", "", $oldesthash);
+
+		$stmt = $db->prepare("DELETE FROM posts WHERE postid = ?");
+		$stmt->execute([$oldestid]);
+
+		if (file_exists("$root/public/usercontent/media/$oldesthash.$oldestext")) {
+			unlink("$root/public/usercontent/media/$oldesthash.$oldestext");
+		}
+
+		if (file_exists("$root/public/usercontent/media/$oldesthash.thumb.$oldestext")) {
+			unlink("$root/public/usercontent/media/$oldesthash.thumb.$oldestext");
+		}
+	}
+
+	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto, sticky, locked) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto, :sticky, :locked)");
 	$stmt->execute([
             "boardurl" => $board,
             "type" => $type,

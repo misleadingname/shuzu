@@ -15,6 +15,16 @@
 				<h2><a href="/admintools/posts">Posts</a></h2>
 				<h2><a href="/admintools/db">DB</a></h2>
 			</div>
+			<form action="/api/admintools/showasadmin.php" method="post" enctype="multipart/form-data">
+					<div class="flex-v center-flex sep">
+						<div>
+							<input type="checkbox" name="show" <?php if($_SESSION["showasadmin"] == true) { print("checked"); } ?>>
+							<span>Display as Admin</span>
+						</div>
+
+					<input type="submit" value="Submit">
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

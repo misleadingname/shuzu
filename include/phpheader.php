@@ -1,9 +1,10 @@
 <?php
+session_start();
+
 $root = realpath($_SERVER["DOCUMENT_ROOT"]."/..");
 set_include_path(get_include_path() . PATH_SEPARATOR . $root);
 
 require_once("func.php");
-
 require_once("config.php");
 
 $request = $_SERVER['REQUEST_URI'];
