@@ -76,7 +76,7 @@ $stmt = $db->prepare('CREATE TABLE "bans" (
 	"timestamp"	INTEGER NOT NULL DEFAULT 0,
 	"reason"	TEXT NOT NULL DEFAULT "No reason given",
 	"boards"	TEXT NOT NULL DEFAULT "*",
-	"expires"	INTEGER NOT NULL DEFAULT 0,
+	"expires"	INTEGER NOT NULL DEFAULT 0
 )');
 print("Prepared STMT (create bans)<br>");
 
