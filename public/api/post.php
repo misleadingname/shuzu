@@ -1,8 +1,6 @@
 <?php
 	require_once("../../include/phpheader.php");
 
-	session_start();
-
 	$stmt = $db->prepare("SELECT * FROM bans WHERE ip = ? AND (expires > strftime('%s', 'now') OR expires = 0); LIMIT 1;");
 	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
 	$ban = $stmt->fetch();
@@ -110,7 +108,7 @@
 		$ext = null;
 	}
 
-	$stmt = $db->prepare("SELECT * FROM boards WHERE boardurl = ? LIMIT 1");
+	$stmt = $db->prepare("SELECT * FROM boards WHERE url = ? LIMIT 1");
 	$stmt->execute([$board]);
 	$board = $stmt->fetch();
 
@@ -119,7 +117,7 @@
 	}
 
 	$stmt = $db->prepare("SELECT * FROM posts WHERE boardurl = ? ORDER BY timestamp DESC, 1");
-	$stmt->execute([$board]);
+	$stmt->execute([$board['url']]);
 	$posts = $stmt->fetchAll();
 
 	if (count($posts) > 100) {
@@ -143,7 +141,7 @@
 
 	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto, sticky, locked) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto, :sticky, :locked)");
 	$stmt->execute([
-            "boardurl" => $board,
+            "boardurl" => $board['url'],
             "type" => $type,
             "timestamp" => time(),
             "replyto" => $type == "reply" ? $replyto : null,
