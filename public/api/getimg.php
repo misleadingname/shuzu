@@ -30,11 +30,13 @@ $file = "$root/public/usercontent/media/$attachmenturl";
 if(file_exists($file)) {
 	if($thumb == "true") {
 		$file = $file . "_thumb.jpg";
-	}
+        header("Content-Type: image/jpeg");
+    }else{
+        header("Content-Type: $mime");
+    }
 
 	$img = fopen($file, "r");
 
-	header("Content-Type: $mime");
 	header("Content-Length: " . filesize($file));
     header("Cache-Control: max-age=2592000"); //30days (60sec * 60min * 24hours * 30days)
 
