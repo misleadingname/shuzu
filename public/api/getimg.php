@@ -19,8 +19,9 @@ if($attachmenturl == null) {
 
 	header("Content-Type: image/png");
 	header("Content-Length: " . filesize("$root/public/images/noimage.png"));
+    header("Cache-Control: max-age=2592000"); //30days (60sec * 60min * 24hours * 30days)
 
-	fpassthru($img);
+    fpassthru($img);
 	exit();
 }
 
@@ -35,8 +36,9 @@ if(file_exists($file)) {
 
 	header("Content-Type: $mime");
 	header("Content-Length: " . filesize($file));
+    header("Cache-Control: max-age=2592000"); //30days (60sec * 60min * 24hours * 30days)
 
-	fpassthru($img);
+    fpassthru($img);
 } else {
 	http_response_code(404);
 
@@ -44,6 +46,7 @@ if(file_exists($file)) {
 
 	header("Content-Type: image/png");
 	header("Content-Length: " . filesize("$root/public/images/noimage.png"));
+    header("Cache-Control: max-age=2592000"); //30days (60sec * 60min * 24hours * 30days)
 
-	fpassthru($img);
+    fpassthru($img);
 }
