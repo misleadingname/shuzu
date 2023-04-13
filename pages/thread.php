@@ -82,6 +82,23 @@
 </div>
 
 <div class="thread">
+	<?php if($_SESSION["showasadmin"] ?? false): ?>
+		<div class="half-size centered">
+			<div class="box">
+				<div class="boxbar">
+					<h3>Admin toolbox</h3>
+				</div>
+				<div class="boxinner">
+					<a href="/api/admintools/post.php?action=lock&id=<?php print($splitRequest[3]); ?>">Lock</a>
+					<a href="/api/admintools/post.php?action=sticky&id=<?php print($splitRequest[3]); ?>">Sticky</a>
+					<a href="/api/admintools/post.php?action=delete&id=<?php print($splitRequest[3]); ?>">Delete</a>
+				</div>
+			</div>
+
+			<hr>
+
+		</div>
+	<?php endif; ?>
 	<?php
 		foreach ($replies as $reply) {
 
@@ -101,6 +118,10 @@
 					<span class="green bold"><?= htmlspecialchars($reply["name"]) . $op ?></span> <?php
 							print(date("d/M/o G:i:s", $reply["timestamp"])); ?>
 						<a href="#<?=$reply["postid"] ?>">No.</a><a href="#<?=$reply["postid"] ?>" onclick="mention(event)"><?= $reply["postid"] ?></a>
+					<?php if($_SESSION["showasadmin"] ?? false): ?>
+						<span class="red">IP: <?= $reply["ip"] ?></span>
+						<a href="/admintools/bans?ip=<?= $reply["ip"] ?>&post=<?= $reply["postid"] ?>">Ban</a>
+					<?php endif; ?>
 				</div>
 				<?php
 					if ($reply["mime"] == "image/gif") {
@@ -137,7 +158,12 @@
 							$txt = preg_replace("/(https?:\/\/[^\s]+)/", '<a href="$1">$1</a>', $txt);
 
 							//$txt = str_replace("\n", '<br>');
-							print($txt); ?></pre>
+							print($txt); ?>
+							<?php if ($reply["banned"]): ?>
+								<br><br><b class="red">USER WAS BANNED FOR THIS POST</b>
+							<?php endif; ?>
+						</pre>
+
 					</div>
 					<?php if ($reply["attachmenturl"] != ".") {?>
 						<sup class="file-info"><?=htmlspecialchars($reply["filename"]) . " " . number_format($reply["size"] / 1024, 2, ".", ".") ?>KB</sup>

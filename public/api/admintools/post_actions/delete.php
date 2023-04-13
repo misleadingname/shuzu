@@ -13,13 +13,13 @@ if ($post["type"] == "post") {
     $stmt->execute([$post['postid']]);
     $posts = $stmt->fetchAll();
 
-    foreach ($posts as $post) {
-        unlink("$root/public/usercontent/media/" . $post["attachmenturl"]);
-        unlink("$root/public/usercontent/media/" . $post["attachmenturl"] . "_thumb.jpg");
+    foreach ($posts as $p) {
+        unlink("$root/public/usercontent/media/" . $p["attachmenturl"]);
+        unlink("$root/public/usercontent/media/" . $p["attachmenturl"] . "_thumb.jpg");
 
         $stmt = $db->prepare("DELETE FROM posts WHERE postid = ?");
-        $stmt->execute([$post["postid"]]);
-        print("Deleted post " . $post["postid"] . "<br>");
+        $stmt->execute([$p["postid"]]);
+        print("Deleted post " . $p["postid"] . "<br>");
     }
 
     $stmt = $db->prepare("DELETE FROM posts WHERE postid = ?");

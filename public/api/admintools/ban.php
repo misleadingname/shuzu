@@ -6,6 +6,7 @@ $ip = $_POST["ip"];
 $boards = $_POST["boards"];
 $reason = $_POST["reason"];
 $expires = $_POST["expires"];
+$postid = $_POST["postid"] ?? null;
 
 if (!filter_var($ip, FILTER_VALIDATE_IP)) {
 	die("Invalid IP address.");
@@ -35,5 +36,10 @@ if ($expires == "") {
 
 $stmt = $db->prepare("INSERT INTO bans (ip, timestamp, boards, reason, expires) VALUES (?, ?, ?, ?, ?)");
 $stmt->execute([$ip, time(), $boards, $reason, $expires]);
+
+if($postid != null){
+    $stmt = $db->prepare("UPDATE posts SET banned = 1 WHERE postid = ?");
+    $stmt->execute([$postid]);
+}
 
 header("Location: /admintools/bans");

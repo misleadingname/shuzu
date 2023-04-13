@@ -11,7 +11,8 @@ $bans = $stmt->fetchAll();
 	<div class="boxinner">
 		<div class="flex-links">
 			<form action="/api/admintools/ban.php"  method="post" enctype="multipart/form-data">
-				<input type="text" name="ip" id="ip" placeholder="IP" required>
+				<input type="text" name="ip" id="ip" placeholder="IP" required value="<?= $_GET["ip"] ?? ""?>">
+				<input type="text" name="postid" id="postid" placeholder="Reason post" required value="<?= $_GET["post"] ?? ""?>">
 				<input type="text" name="reason" id="reason" placeholder="Reason" required>
 				<input type="date" name="expires" id="expires" placeholder="Expires">
 				<input type="text" name="boards" id="boards" placeholder="Boards" required>
