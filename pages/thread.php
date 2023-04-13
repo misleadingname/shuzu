@@ -158,11 +158,11 @@
 							$txt = preg_replace("/(https?:\/\/[^\s]+)/", '<a href="$1">$1</a>', $txt);
 
 							//$txt = str_replace("\n", '<br>');
-							print($txt); ?>
-							<?php if ($reply["banned"]): ?>
-								<br><br><b class="red">USER WAS BANNED FOR THIS POST</b>
-							<?php endif; ?>
-						</pre>
+							print($txt);
+							if ($reply["banned"]){
+								print('<br><br><b class="red">USER WAS BANNED FOR THIS POST</b>');
+							}
+							?></pre>
 
 					</div>
 					<?php if ($reply["attachmenturl"] != ".") {?>
