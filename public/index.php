@@ -6,6 +6,8 @@ require_once("include/func.php");
 
 require_once("include/header.php");
 
+$request = explode("?", $request)[0];
+
 if ($request == '/') {
     require_once("pages/home.php");
 } else if ($request == '/admintool') {

@@ -57,6 +57,8 @@ $stmt = $db->prepare('CREATE TABLE "posts" (
 	"replyto"	INTEGER,
 	"sticky"	INTEGER,
 	"locked"	INTEGER,
+	"banned" INTEGER,
+	"rank" INTEGER,
 	PRIMARY KEY("postid" AUTOINCREMENT)
 )');
 print("Prepared STMT (create posts)<br>");
@@ -76,7 +78,7 @@ $stmt = $db->prepare('CREATE TABLE "bans" (
 	"timestamp"	INTEGER NOT NULL DEFAULT 0,
 	"reason"	TEXT NOT NULL DEFAULT "No reason given",
 	"boards"	TEXT NOT NULL DEFAULT "*",
-	"expires"	INTEGER NOT NULL DEFAULT 0,
+	"expires"	INTEGER NOT NULL DEFAULT 0
 )');
 print("Prepared STMT (create bans)<br>");
 

@@ -19,8 +19,9 @@ if($attachmenturl == null) {
 
 	header("Content-Type: image/png");
 	header("Content-Length: " . filesize("$root/public/images/noimage.png"));
+    header("Cache-Control: max-age=2592000"); //30days (60sec * 60min * 24hours * 30days)
 
-	fpassthru($img);
+    fpassthru($img);
 	exit();
 }
 
@@ -29,14 +30,17 @@ $file = "$root/public/usercontent/media/$attachmenturl";
 if(file_exists($file)) {
 	if($thumb == "true") {
 		$file = $file . "_thumb.jpg";
-	}
+        header("Content-Type: image/jpeg");
+    }else{
+        header("Content-Type: $mime");
+    }
 
 	$img = fopen($file, "r");
 
-	header("Content-Type: $mime");
 	header("Content-Length: " . filesize($file));
+    header("Cache-Control: max-age=2592000"); //30days (60sec * 60min * 24hours * 30days)
 
-	fpassthru($img);
+    fpassthru($img);
 } else {
 	http_response_code(404);
 
@@ -44,6 +48,7 @@ if(file_exists($file)) {
 
 	header("Content-Type: image/png");
 	header("Content-Length: " . filesize("$root/public/images/noimage.png"));
+    header("Cache-Control: max-age=2592000"); //30days (60sec * 60min * 24hours * 30days)
 
-	fpassthru($img);
+    fpassthru($img);
 }
