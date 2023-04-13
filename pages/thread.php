@@ -1,31 +1,11 @@
 <?php
 	date_default_timezone_set('UTC');
 
-	$stmt = $db->prepare("SELECT type FROM posts WHERE postid=?");
-	$stmt->execute([$splitRequest[3]]);
+	$stmt = $db->prepare("SELECT COUNT(*) FROM posts WHERE postid=? AND type='post' AND boardurl=?");
+	$stmt->execute([$splitRequest[3],$splitRequest[1]]);
 	$result = $stmt->fetch();
 
-	if ($result == null) {
-		http_response_code(404);
-		require_once("$root/pages/error.php");
-		require_once("$root/include/footer.php");
-		exit();
-	}
-
-	$type = $result[0];
-
-	if ($type != "post") {
-		http_response_code(404);
-		require_once("$root/pages/error.php");
-		require_once("$root/include/footer.php");
-		exit();
-	}
-
-	$stmt = $db->prepare("SELECT boardurl FROM posts WHERE postid=?");
-	$stmt->execute([$splitRequest[3]]);
-	$board = $stmt->fetch()[0];
-
-	if ($board != $splitRequest[1]) {
+	if ($result[0] == 0) {
 		http_response_code(404);
 		require_once("$root/pages/error.php");
 		require_once("$root/include/footer.php");
