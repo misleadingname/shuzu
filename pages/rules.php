@@ -29,6 +29,7 @@ require_once("../include/phpheader.php");
 					<li>Real life child pornography.</li>
 					<li>Loli/shota pornography.</li>
 					<li>Cub pornography.</li>
+					<li>Bestiality.</li>
 				</ul>
 			<li>You will not post or request personal information ("dox") or calls to invasion ("raids"). Inciting or participating in cross-board "intra-chan" raids is also not permitted.</li>
 			<li>All boards without the <sup><span class="red bold">(NSFW)</span></sup> marking are to be considered "work safe". Violators may be temporarily banned and their posts removed.<br><i>Note: Spoilered pornography or other NSFW content is NOT allowed.</i></li>
