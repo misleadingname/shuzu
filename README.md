@@ -45,6 +45,39 @@ shuzu.example.com {
 	try_files {path} {path}/index.php
 }
 ```
+Nginx:
+```nginx
+server {
+    server_name shuzu.example.com;
+    root /path/to/public;
+
+    location / {
+        try_files $uri $uri/ /index.php;
+    }
+
+    location ~ \.php$ {
+        fastcgi_pass unix:/run/php-fpm/php-fpm.sock;
+        fastcgi_index /index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location = /index.php {
+        fastcgi_pass unix:/run/php-fpm/php-fpm.sock;
+        fastcgi_index /index.php;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+
+    location /index.php {
+        try_files $uri $uri/ /index.php;
+    }
+
+    location = / {
+        index off;
+    }
+}
+```
 
 *PR's for the readme on configurations for other webservers will be welcome!*
 
