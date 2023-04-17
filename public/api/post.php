@@ -173,7 +173,7 @@
 	if ($type == "reply") {
 		?>
         <script>
-			window.location.replace("/<?php print("$board/thread/$replyto#$postid"); ?>")
+			window.location.replace("/<?php print("	/thread/$replyto#$postid"); ?>")
         </script>
 		<?php
 	} else {
