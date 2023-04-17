@@ -13,4 +13,4 @@ if($result == []){
 }
 
 header("Content-Type: application/json");
-echo json_encode($result);
+print(json_encode($result));
