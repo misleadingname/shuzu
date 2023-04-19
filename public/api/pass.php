@@ -2,7 +2,23 @@
 
 require_once("../../include/phpheader.php");
 
-if($_POST['action'] ?? '' == 'logout'){
+if(($_POST['action'] ?? '') == 'logout'){
+	unset($_SESSION['pass_id']);
+	header("Location: /pass");
+	die();
+}
+
+if(($_POST['action'] ?? '') == 'changepin'){
+	$stmt = $db->prepare("SELECT * FROM passes WHERE id = ?");
+	$stmt->execute([$_SESSION['pass_id']]);
+	$pass = $stmt->fetch(PDO::FETCH_ASSOC);
+
+	if(!password_verify($_POST['pin'], $pass['pin'])){
+		die("Wrong PIN.");
+	}
+	$stmt = $db->prepare("UPDATE passes SET pin = ? WHERE id = ?");
+	$stmt->execute([password_hash($_POST['newpin'], PASSWORD_DEFAULT), $_SESSION["pass_id"]]);
+
 	unset($_SESSION['pass_id']);
 	header("Location: /pass");
 	die();

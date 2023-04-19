@@ -13,7 +13,13 @@ $passes = $stmt->fetchAll();
 			<h3>Create a new pass</h3>
 			<form action="/api/admintools/pass.php" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="type" value="create">
-				<input type="text" name="token" id="token" placeholder="Token" required>
+
+				<?php
+				$words = file("$root/include/wordlist.txt");
+				$gentoken = $words[rand(0, count($words) - 1)] . "-" . $words[rand(0, count($words) - 1)] . "-" . $words[rand(0, count($words) - 1)] . "-" . $words[rand(0, count($words) - 1)];
+				?>
+
+				<input type="text" name="token" id="token" placeholder="Token" required value="<?= $gentoken ?>">
 				<input type="password" name="pin" id="pin" placeholder="PIN" required>
 				<input type="date" name="expires" id="expires" placeholder="Expires"
 					   value="<?= date("Y-m-d", time() + 30 * 24 * 60 * 60) ?>">

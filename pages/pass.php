@@ -23,16 +23,17 @@ function ShuzuPassLogo()
 			<div class="flex-links">
 				<p>You are a pass user since: <?= date("Y-m-d", $pass['since']) ?></p>
 				<p>Your pass expires on: <?= date("Y-m-d", $pass['expires']) ?></p>
-				<form action="/api/pass.php" method="post" enctype="multipart/form-data">
+				<form action="/api/pass.php" method="post" enctype="application/x-www-form-urlencoded">
 					<input type="hidden" name="action" value="logout">
 					<button>Logout</button>
 				</form>
 			</div>
-			<form action="/api/pass.php" method="post" enctype="multipart/form-data">
+			<form action="/api/pass.php" method="post" enctype="application/x-www-form-urlencoded">
 				<div class="flex-container flex-v">
 					<h3>Change your PIN</h3>
+					<input type="hidden" name="action" value="changepin">
 					<input type="password" name="pin" placeholder="Current PIN" required>
-					<input type="password" name="pin" placeholder="PIN" required>
+					<input type="password" name="newpin" placeholder="PIN" required>
 					<input type="submit" value="Change">
 				</div>
 			</form>
