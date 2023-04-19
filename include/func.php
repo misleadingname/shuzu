@@ -3,7 +3,7 @@ function path2url($file) {
     return str_replace($_SERVER['DOCUMENT_ROOT'], '', $file);
 }
 
-function error($reason, $code = 400) {
+function error($reason, $code = 400, $redirect = null) {
 		global $root;
 		global $board;
 
@@ -24,7 +24,13 @@ function error($reason, $code = 400) {
 				</noscript>
 				<script>
 					<?php
-						if($board == null || $board == "") {
+						if($redirect != null){
+							?>
+							setTimeout(function() {
+								window.location.href = "<?= $redirect ?>";
+							}, 3000);
+							<?php
+						} else if($board == null || $board == "") {
 							?>
 							setTimeout(function() {
 								window.location.href = "/";
