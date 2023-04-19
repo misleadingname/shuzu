@@ -4,13 +4,8 @@ function path2url($file) {
 }
 
 function error($reason, $code = 400) {
-		/*
-		*  HACK: For some reason php loses the track of the $root, $db, $request variables as soon as i execute a function.
-		*  The only needed variables is $root for this function, but it's really strange that php loses them.
-		*  FIXME perhaps?
-		*/
-		$root = $_SERVER["DOCUMENT_ROOT"];
-		$board = $_POST["board"];
+		global $root;
+		global $board;
 
 		require_once("include/header.php");
 
