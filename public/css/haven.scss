@@ -285,6 +285,12 @@ hr {
 		width: 100%;
 		margin: 0.25em auto 0.25em auto;
 		resize: none;
+
+		&[type="checkbox"] {
+			width: auto;
+			height: auto;
+			align-self: start;
+		}
 	}
 
 	input[type="submit"] {
@@ -484,7 +490,7 @@ hr {
 
 table {
 	border-collapse: collapse;
-	
+
 	width: 100%;
 }
 
@@ -499,6 +505,16 @@ tr:nth-child(even) {
 
 tr.expired {
 	background-color: lightcoral;
+}
+
+tr.revoked {
+	background-color: indianred;
+}
+
+.shuzupass{
+	display: inline-block;
+	font-weight: bold;
+	color: deeppink;
 }
 
 /* FOOTER */

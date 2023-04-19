@@ -3,7 +3,7 @@ function path2url($file) {
     return str_replace($_SERVER['DOCUMENT_ROOT'], '', $file);
 }
 
-function error($reason, $code = 400, $redirect = null) {
+function error($reason, $code = 400, $errorTitle = "API ERROR", $redirect = null) {
 		global $root;
 		global $board;
 
@@ -13,7 +13,7 @@ function error($reason, $code = 400, $redirect = null) {
 		?>
 		<div class="box">
 			<div class="boxbar">
-				<h3>API ERROR</h3>
+				<h3><?= $errorTitle ?></h3>
 			</div>
 			<div class="boxinner">
 				<p><?php print($reason); ?><br><sup>Redirecting in 3 seconds...</sup></p>

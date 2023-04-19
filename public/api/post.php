@@ -1,7 +1,7 @@
 <?php
 	require_once("../../include/phpheader.php");
 
-	$stmt = $db->prepare("SELECT * FROM bans WHERE ip = ? AND (expires > strftime('%s', 'now') OR expires = 0); LIMIT 1;");
+	$stmt = $db->prepare("SELECT * FROM bans WHERE ip = ? AND (expires > strftime('%s', 'now') OR expires = 0);");
 	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
 	$ban = $stmt->fetch();
 
@@ -51,6 +51,37 @@
 	$content = trim($_POST["content"]);
 
 	$uploadedfile = $_FILES["attachment"];
+
+	if($_POST['options'] != "") {
+		$options = explode(" ", $_POST['options']);
+	} else {
+		$options = [];
+	}
+
+	$pass_id = $_SESSION['pass_id'] ?? null;
+
+	if($pass_id != null) {
+		$stmt = $db->prepare("SELECT * FROM passes WHERE id = ?");
+		$stmt->execute([$pass_id]);
+		$pass = $stmt->fetch();
+		if($pass == null) {
+			unset($_SESSION['pass_id']);
+			die("Invalid pass.");
+		}
+		if($pass['expires'] < time()){
+			unset($_SESSION['pass_id']);
+			die("Pass expired.");
+		}
+		if ($pass['revoked'] == 1) {
+			unset($_SESSION['pass_id']);
+			die("Pass revoked.");
+		}
+	}
+
+	$pass_visible = false;
+	if (in_array("pass", $options) && $pass_id != null) {
+		$pass_visible = true;
+	}
 
 	if ($uploadedfile["error"] != 0 && $type == "post") {
 		die("Something went wrong with uploading the attachment.");
@@ -139,7 +170,7 @@
 		}
 	}
 
-	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto, sticky, locked) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto, :sticky, :locked)");
+	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto, pass_id, pass_visible, sticky, locked) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto, :pass_id, :pass_visible, :sticky, :locked)");
 	$stmt->execute([
             "boardurl" => $board['url'],
             "type" => $type,
@@ -153,6 +184,8 @@
             "filename" => $uploadedfile["name"] ?? null,
             "mime" => $uploadedfile["type"] ?? null,
             "attachmenturl" => $hash . ".$ext" ?? null,
+			"pass_id" => $pass_id,
+			"pass_visible" => $pass_visible,
 			"sticky" => 0,
 			"locked" => 0,
     ]);

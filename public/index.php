@@ -33,6 +33,10 @@ if ($request == "/") {
 	require_once("include/footer.php");
 } else if ($request == "/draw") {
 	require_once("pages/draw.php");
+} else if ($request == "/pass"){
+	require_once("include/header.php");
+	require_once("pages/pass.php");
+	require_once("include/footer.php");
 } else {
 	require_once("include/header.php");
 

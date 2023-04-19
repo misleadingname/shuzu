@@ -99,7 +99,6 @@ hr {
 }
 
 .fit {
-  width: -moz-fit-content;
   width: fit-content;
 }
 
@@ -250,6 +249,11 @@ hr {
   margin: 0.25em auto 0.25em auto;
   resize: none;
 }
+.flex-links input[type=checkbox] {
+  width: auto;
+  height: auto;
+  align-self: start;
+}
 .flex-links input[type=submit] {
   width: 15%;
 }
@@ -329,7 +333,6 @@ hr {
 /* THREAD */
 .path {
   font-size: large;
-  width: -moz-fit-content;
   width: fit-content;
   margin: 1em auto 1em auto;
 }
@@ -342,7 +345,6 @@ hr {
 
 .thread-reply {
   display: block;
-  width: -moz-fit-content;
   width: fit-content;
   margin-right: auto;
   margin-bottom: 0.5em;
@@ -355,11 +357,9 @@ hr {
 }
 .thread-reply img, .thread-reply video {
   margin-right: 0.5em;
-  -o-object-fit: none;
-     object-fit: none;
+  object-fit: none;
 }
 .thread-reply .fullImage {
-  width: -moz-max-content !important;
   width: max-content !important;
 }
 .thread-reply .reply-top {
@@ -371,9 +371,7 @@ hr {
 }
 .thread-reply .reply-inner {
   display: inline-block;
-  width: -moz-fit-content;
   width: fit-content;
-  height: -moz-fit-content;
   height: fit-content;
   margin: 0;
   padding: 1em;
@@ -434,7 +432,19 @@ tr.expired {
   background-color: lightcoral;
 }
 
+tr.revoked {
+  background-color: indianred;
+}
+
+.shuzupass {
+  display: inline-block;
+  font-weight: bold;
+  color: deeppink;
+}
+
 /* FOOTER */
 .footer {
   text-align: center;
-}/*# sourceMappingURL=haven.css.map */
+}
+
+/*# sourceMappingURL=haven.css.map */

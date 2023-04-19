@@ -1,5 +1,5 @@
 <?php
-	$insults = file("../include/insults.txt");
+	$insults = file("$root/include/insults.txt");
 
     if(!empty($splitRequest[3])) {
 		$stmt = $db->prepare("SELECT * FROM posts WHERE postid=?");
