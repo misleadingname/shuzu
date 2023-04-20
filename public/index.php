@@ -31,14 +31,12 @@ if ($request == "/") {
 	require_once("include/header.php");
 	require_once("pages/banned.php");
 	require_once("include/footer.php");
-} else if ($request == "/draw") {
-	require_once("pages/draw.php");
 } else {
 	require_once("include/header.php");
 
-	$stmt = $db->prepare("SELECT * FROM boards WHERE url = ?");
-	$stmt->execute([$splitRequest[1]]);
-	$board = $stmt->fetch();
+    $stmt = $db->prepare("SELECT * FROM boards WHERE url = ?");
+    $stmt->execute([$splitRequest[1]]);
+    $board = $stmt->fetch();
 
 	if ($board == null) {
 		http_response_code(404);
