@@ -23,6 +23,8 @@ if ($request == '/') {
     require_once('pages/rules.php');
 } else if ($request == '/banned') {
     require_once('pages/banned.php');
+} else if ($request == "/pass"){
+	require_once("pages/pass.php");
 } else {
     $stmt = $db->prepare("SELECT * FROM boards WHERE url = ?");
     $stmt->execute([$splitRequest[1]]);
