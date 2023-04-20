@@ -14,7 +14,7 @@ if(($_POST['action'] ?? '') == 'changepin'){
 	$pass = $stmt->fetch(PDO::FETCH_ASSOC);
 
 	if(!password_verify($_POST['pin'], $pass['pin'])){
-		die("Wrong PIN.");
+		error("Wrong pin", 401, "Pass error", "/pass");
 	}
 	$stmt = $db->prepare("UPDATE passes SET pin = ? WHERE id = ?");
 	$stmt->execute([password_hash($_POST['newpin'], PASSWORD_DEFAULT), $_SESSION["pass_id"]]);
