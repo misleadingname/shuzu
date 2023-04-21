@@ -59,6 +59,8 @@ $stmt = $db->prepare('CREATE TABLE "posts" (
 	"locked"	INTEGER,
 	"banned" INTEGER,
 	"rank" INTEGER,
+	"pass_id" INT DEFAULT NULL,
+	"pass_visible" INT DEFAULT 0,
 	PRIMARY KEY("postid" AUTOINCREMENT)
 )');
 print("Prepared STMT (create posts)<br>");
@@ -81,6 +83,27 @@ $stmt = $db->prepare('CREATE TABLE "bans" (
 	"expires"	INTEGER NOT NULL DEFAULT 0
 )');
 print("Prepared STMT (create bans)<br>");
+
+$stmt->execute();
+$result = $stmt->fetch();
+
+print("Executing SQL<br>");
+if (empty($result)) {
+	print("Executed successfully<br>");
+} else {
+	die("Unable to execute SQL");
+}
+
+$stmt = $db->prepare('CREATE TABLE passes(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    token TEXT NOT NULL,
+    pin TEXT NOT NULL,
+    since INT NOT NULL,
+    expires INT NOT NULL,
+    revoked INT DEFAULT 0,
+    revoke_reason TEXT DEFAULT NULL
+);');
+print("Prepared STMT (create passes)<br>");
 
 $stmt->execute();
 $result = $stmt->fetch();

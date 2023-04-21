@@ -40,6 +40,7 @@
 						print($splitRequest[1]); ?>">
 					<input type="text" name="name" placeholder="Name" value="Anonymous" required>
 					<textarea id="replyTextarea" name="content" placeholder="Content" required></textarea>
+					<input type="text" name="options" placeholder="Options">
 					<input type="file" name="attachment">
 					<p>Files up to 3MB are allowed.</p><sup>WEBM, WEBP, MP4, PNG, JPG, GIF.</sup>
 					<input type="submit" value="Post">
@@ -55,7 +56,7 @@
 <?php
 	}
 
-	$stmt = $db->prepare("SELECT * FROM posts WHERE replyto=? OR postid=?");
+	$stmt = $db->prepare("SELECT *, (SELECT since FROM passes b WHERE b.id == a.pass_id) AS pass_since FROM posts a WHERE replyto=? OR postid=?");
 	$stmt->execute([$splitRequest[3],$splitRequest[3]]);
 	$replies = $stmt->fetchAll();
 ?>
@@ -95,7 +96,14 @@
 			?>
 			<div id="<?= $reply["postid"] ?>" class="thread-reply">
 				<div class="reply-top">
-					<span class="green bold"><?= htmlspecialchars($reply["name"]) . $op ?></span> <?php
+					<span class="green bold"><?= htmlspecialchars($reply["name"]) . $op ?></span>
+					<?php if ($reply["pass_visible"] == 1): ?>
+						<span title="<?= date("d/M/o", $reply["pass_since"]) ?>" class="shuzupass">ShuzuPass+</span>
+						<?php if($_SESSION["showasadmin"] ?? false): ?>
+							<span class="red">(<?= $reply["pass_id"] ?></span>
+						<?php endif; ?>
+					<?php endif ?>
+					<?php
 							print(date("d/M/o G:i:s", $reply["timestamp"])); ?>
 						<a href="#<?=$reply["postid"] ?>">No.</a><a href="#<?=$reply["postid"] ?>" onclick="mention(event)"><?= $reply["postid"] ?></a>
 					<?php if($_SESSION["showasadmin"] ?? false): ?>
