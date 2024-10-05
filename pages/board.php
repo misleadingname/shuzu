@@ -30,7 +30,7 @@ require_once("include/captcha.php");
 
     <div class="board-banner">
         <?php
-        $errDir = glob("$root\\public/images/banners/*/*.*");
+        $errDir = glob("$root/public/images/banners/*/*.*");
         if(sizeof($errDir) != 0){
             $file = array_rand($errDir);
             preg_match('/.*\/banners\/(.*)\/.*\..*/', $errDir[$file], $out);
