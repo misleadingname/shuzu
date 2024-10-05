@@ -1,6 +1,6 @@
 <?php
 $stmt = $db->prepare("SELECT * FROM bans WHERE ip = ? AND expires > strftime('%s', 'now') OR expires = 0; LIMIT 1;");
-$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
+$stmt->execute([get_ip()]);
 $stmt->execute();
 $banned = $stmt->fetch();
 

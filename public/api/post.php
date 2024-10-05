@@ -2,7 +2,7 @@
 	require_once("../../include/phpheader.php");
 
 	$stmt = $db->prepare("SELECT * FROM bans WHERE ip = ? AND (expires > strftime('%s', 'now') OR expires = 0);");
-	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
+	$stmt->execute([get_ip()]);
 	$ban = $stmt->fetch();
 
 	if ($ban != null) {
@@ -13,7 +13,7 @@
 	}
 
 	$stmt = $db->prepare("SELECT * FROM posts WHERE ip = ? ORDER BY timestamp DESC LIMIT 1");
-	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
+	$stmt->execute([get_ip()]);
 	$lastpost = $stmt->fetch();
 
 	if ($lastpost != null) {
@@ -170,19 +170,6 @@
 		}
 	}
 
-	function get_ip()
-	{
-		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-			$ip = $_SERVER['HTTP_CLIENT_IP'];
-		} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-		} else {
-			$ip = $_SERVER['REMOTE_ADDR'];
-		}
-
-		return $ip;
-	}
-
 	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto, pass_id, pass_visible, sticky, locked) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto, :pass_id, :pass_visible, :sticky, :locked)");
 	$stmt->execute([
             "boardurl" => $board['url'],
@@ -211,8 +198,8 @@
 	}
 
 	$stmt = $db->prepare("SELECT * FROM posts WHERE ip = ? ORDER BY timestamp DESC LIMIT 1");
-	$stmt->execute([$_SERVER["REMOTE_ADDR"]]);
-	$post = $stmt->fetch();
+	$stmt->execute([get_ip()]);
+	$post = $stmt->fetchAll();
 
 	$postid = $post["postid"];
 

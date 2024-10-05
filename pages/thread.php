@@ -89,7 +89,7 @@
 				$op = "";
 			}
 
-			if ($reply["ip"] == $_SERVER["REMOTE_ADDR"]) {
+			if ($reply["ip"] == get_ip()) {
 				$op .= " (You)";
 			}
 
