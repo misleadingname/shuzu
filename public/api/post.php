@@ -199,20 +199,20 @@
 
 	$stmt = $db->prepare("SELECT * FROM posts WHERE ip = ? ORDER BY timestamp DESC LIMIT 1");
 	$stmt->execute([get_ip()]);
-	$post = $stmt->fetchAll();
+	$post = $stmt->fetch();
 
 	$postid = $post["postid"];
 
 	if ($type == "reply") {
 		?>
         <script>
-			window.location.replace("/<?= "$board/thread/$replyto#$postid" ?>")
+			window.location.replace("/<?= "{$board["url"]}/thread/$replyto#$postid" ?>")
         </script>
 		<?php
 	} else {
 		?>
         <script>
-			window.location.replace("/<?= $board ?>/thread/<?= $postid ?>")
+			window.location.replace("/<?= "{$board["url"]}/thread/$postid"?>")
         </script>
 		<?php
 	}

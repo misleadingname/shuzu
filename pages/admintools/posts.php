@@ -34,10 +34,10 @@ $posts = $stmt->fetchAll();
 							}
 							print("#" . $post["postid"]);
 							?>
-						"><?php print($post["postid"]); ?></a></td>
-						<td><?php print($post["boardurl"]); ?></td>
+						"><?= $post["postid"]; ?></a></td>
+						<td><?=  $post["boardurl"]; ?></td>
 						<td><a href="/<?php print($post["boardurl"]); ?>/thread/<?php print($post["replyto"]); ?>"><?php print($post["replyto"]); ?></a></td>
-						<td><?php print(htmlspecialchars($post["name"])); ?></td>
+						<td><?= htmlspecialchars($post["name"]) ?></td>
 						<td style='text-align: left;'><?php
 //							$content = str_replace("\n", "</span><span><br>", $post["text"]);
 
@@ -56,7 +56,7 @@ $posts = $stmt->fetchAll();
 							$content = "<span>" . $txt . "</span>";
 							print($content);
 						?></td>
-						<td><?php print($post["ip"]); ?></td>
+						<td><?= $post["ip"]; ?></td>
 						<td>
 							<a href="/api/admintools/post.php?action=lock&id=<?php print($post["postid"]); ?>">Lock</a>
 							<a href="/api/admintools/post.php?action=sticky&id=<?php print($post["postid"]); ?>">Sticky</a>

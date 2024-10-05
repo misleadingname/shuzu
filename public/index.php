@@ -1,4 +1,5 @@
 <?php
+global $db, $splitRequest;
 $request = urldecode($_SERVER["REQUEST_URI"]);
 
 require_once("../include/phpheader.php");
@@ -10,8 +11,6 @@ $request = explode("?", $request)[0];
 
 if ($request == '/') {
     require_once("pages/home.php");
-} else if ($request == '/admintool') {
-    require_once('pages/admintool.php');
 } else if (str_starts_with($request, '/admintools')) {
     require_once("./api/admintools/verify.php");
     if ($request == "/admintools") {
