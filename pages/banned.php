@@ -1,10 +1,10 @@
 <?php
-$stmt = $db->prepare("SELECT * FROM bans WHERE ip = ? AND expires > strftime('%s', 'now') OR expires = 0; LIMIT 1;");
+$stmt = $db->prepare("SELECT * FROM bans WHERE ip = ? AND (expires > strftime('%s', 'now') OR expires = 0); LIMIT 1;");
 $stmt->execute([get_ip()]);
 $stmt->execute();
 $banned = $stmt->fetch();
 
-if($banned != null) {
+if(isset($banned) && !empty($banned)) {
 	$reason = "You are banned in participating in the following boards:<br>" . $banned["boards"] . "<br>For the following reason:<br><code>" . $banned["reason"] . "</code>";
 	if ($banned["boards"] == "*") {
 		$reason = "You are banned from participating in <b>all</b> boards for the following reason:<br><code>" . $banned["reason"] . "</code>";
@@ -25,6 +25,6 @@ if($banned != null) {
 		<h3>Banned</h3>
 	</div>
 	<div class="boxinner">
-		<p><?php print($reason); ?></p>
+		<p><?= $reason ?></p>
 	</div>
 </div>

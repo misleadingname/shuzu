@@ -206,13 +206,13 @@
 	if ($type == "reply") {
 		?>
         <script>
-			window.location.replace("/<?php print("$board/thread/$replyto#$postid"); ?>")
+			window.location.replace("/<?= "$board/thread/$replyto#$postid" ?>")
         </script>
 		<?php
 	} else {
 		?>
         <script>
-			window.location.replace("/<?php print($board); ?>/thread/<?php print($postid); ?>")
+			window.location.replace("/<?= $board ?>/thread/<?= $postid ?>")
         </script>
 		<?php
 	}
