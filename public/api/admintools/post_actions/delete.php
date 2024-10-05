@@ -26,7 +26,10 @@ if ($post["type"] == "post") {
 
     $stmt = $db->prepare("DELETE FROM posts WHERE postid = ?");
     $stmt->execute([$post['postid']]);
+
+	print("Deleted post " . $post["postid"] . "<br>");
 } elseif($post["type"] == "reply") {
 	$stmt = $db->prepare("DELETE FROM posts WHERE postid = ?");
 	$stmt->execute([$post['postid']]);
+	print("Deleted post " . $post["postid"] . "<br>");
 }

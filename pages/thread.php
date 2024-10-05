@@ -109,6 +109,7 @@
 					<?php if($_SESSION["showasadmin"] ?? false): ?>
 						<span class="red">IP: <?= $reply["ip"] ?></span>
 						<a href="/admintools/bans?ip=<?= $reply["ip"] ?>&post=<?= $reply["postid"] ?>">Ban</a>
+						<a href="/api/admintools/post.php?action=delete&id=<?= $reply["postid"] ?>">Delete</a>
 					<?php endif; ?>
 				</div>
 				<?php

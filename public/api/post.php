@@ -52,7 +52,7 @@
 
 	$uploadedfile = $_FILES["attachment"];
 
-	if($_POST['options'] != "") {
+	if(isset($_POST['options'])) {
 		$options = explode(" ", $_POST['options']);
 	} else {
 		$options = [];
@@ -170,13 +170,26 @@
 		}
 	}
 
+	function get_ip()
+	{
+		if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+			$ip = $_SERVER['HTTP_CLIENT_IP'];
+		} elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+			$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+		} else {
+			$ip = $_SERVER['REMOTE_ADDR'];
+		}
+
+		return $ip;
+	}
+
 	$stmt = $db->prepare("INSERT INTO posts (boardurl, type, timestamp, name, ip, title, text, attachmenturl, size, filename, mime, replyto, pass_id, pass_visible, sticky, locked) VALUES (:boardurl, :type, :timestamp, :name, :ip, :title, :text, :attachmenturl, :size, :filename, :mime, :replyto, :pass_id, :pass_visible, :sticky, :locked)");
 	$stmt->execute([
             "boardurl" => $board['url'],
             "type" => $type,
             "timestamp" => time(),
             "replyto" => $type == "reply" ? $replyto : null,
-            "ip" => $_SERVER['REMOTE_ADDR'],
+            "ip" => get_ip(),
             "name" => $name,
             "title" => $title,
             "text" => $content,
