@@ -1,0 +1,2 @@
+[17-Dec-2023 01:14:12] ERROR: unable to bind listening socket for address '/mnt/d/projects/_webStuffs/shuzu/.devenv/state/php-fpm/web.sock': Operation not supported (95)
+[17-Dec-2023 01:14:12] ERROR: FPM initialization failed

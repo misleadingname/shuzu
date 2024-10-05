@@ -1,5 +1,7 @@
 <?php
 
+global $db;
+
 $stmt = $db->prepare("SELECT * FROM posts WHERE postid = ?");
 $stmt->execute([$_GET["id"]]);
 $post = $stmt->fetch();
@@ -24,4 +26,7 @@ if ($post["type"] == "post") {
 
     $stmt = $db->prepare("DELETE FROM posts WHERE postid = ?");
     $stmt->execute([$post['postid']]);
+} elseif($post["type"] == "reply") {
+	$stmt = $db->prepare("DELETE FROM posts WHERE postid = ?");
+	$stmt->execute([$post['postid']]);
 }
