@@ -385,6 +385,8 @@ hr {
   display: inline-block;
   text-decoration: none;
   color: black;
+
+	float: left;
 }
 .thread-reply .reply-inner .reply-image button {
   display: block;
@@ -402,6 +404,9 @@ hr {
   vertical-align: top;
   white-space: pre-wrap;
   word-wrap: break-word;
+
+	display: contents;
+	float: left;
 }
 .thread-reply .reply-inner .reply-text code {
   padding: 1px;
